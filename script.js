@@ -1,14 +1,25 @@
-const sideMenu = document.querySelector('#sideMenu');
+const mobileMenu = document.querySelector('#mobileMenu');
 const navBar = document.querySelector("nav");
 const navLinks = document.querySelector("nav ul");
 
 function openMenu(){
-    sideMenu.style.transform = 'translateX(-16rem)';
+    if (mobileMenu.classList.contains('show')) {
+        closeMenu();
+    } else {
+        mobileMenu.classList.remove('hidden');
+        // Trigger animation after removing hidden class
+        setTimeout(() => {
+            mobileMenu.classList.add('show');
+        }, 10);
+    }
 }
 
-
 function closeMenu(){
-    sideMenu.style.transform = 'translateX(16rem)';
+    mobileMenu.classList.remove('show');
+    // Hide the menu after animation completes
+    setTimeout(() => {
+        mobileMenu.classList.add('hidden');
+    }, 300);
 }
 
 window.addEventListener('scroll', () =>{
@@ -20,6 +31,17 @@ window.addEventListener('scroll', () =>{
         navLinks.classList.add('bg-white','shadow-sm','bg-opacity-50','dark:border','dark:border-white/50','dark:bg-transparent');
     }
 })
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (event) => {
+    const menuButton = document.querySelector('[onclick="openMenu()"]');
+    const isClickInsideMenu = mobileMenu.contains(event.target);
+    const isClickOnMenuButton = menuButton && menuButton.contains(event.target);
+    
+    if (!isClickInsideMenu && !isClickOnMenuButton && mobileMenu.classList.contains('show')) {
+        closeMenu();
+    }
+});
 
 // ---------------- light mode and dark mode ----------->
 
