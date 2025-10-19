@@ -83,6 +83,19 @@
         .dark #mobileMenu::before {
             border-bottom-color: #1f2937 !important;
         }
+
+        /* Global scroll offset so sections don't hide under fixed navbar */
+        :root { --nav-height: 72px; }
+        /* Native anchor offset so headings sit exactly under the fixed navbar */
+        html { scroll-padding-top: var(--nav-height); }
+        #home,
+        #about,
+        #skills,
+        #experience,
+        #projects,
+        #contact {
+            scroll-margin-top: var(--nav-height);
+        }
     </style>
 </head>
 <body class="overflow-x-hidden font-Outfit leading-8 dark:bg-darkTheme dark:text-white">
@@ -102,6 +115,7 @@
                 <li><a href="#top" class="px-3 py-2 text-sm lg:text-base hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Home</a></li>
                 <li><a href="#about" class="px-3 py-2 text-sm lg:text-base hover:text-purple-600 dark:hover:text-purple-400 transition-colors">About</a></li>
                 <li><a href="#skills" class="px-3 py-2 text-sm lg:text-base hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Skills</a></li>
+                <li><a href="#experience" class="px-3 py-2 text-sm lg:text-base hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Experience</a></li>
                 <li><a href="#projects" class="px-3 py-2 text-sm lg:text-base hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Projects</a></li>
                 <li><a href="#contact" class="px-3 py-2 text-sm lg:text-base hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Contact</a></li>
             </ul>
@@ -135,6 +149,7 @@
                 <a href="#top" onclick="closeMenu()" class="px-4 py-3 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-center font-medium">Home</a>
                 <a href="#about" onclick="closeMenu()" class="px-4 py-3 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-center font-medium">About</a>
                 <a href="#skills" onclick="closeMenu()" class="px-4 py-3 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-center font-medium">Skills</a>
+                <a href="#experience" onclick="closeMenu()" class="px-4 py-3 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-center font-medium">Experience</a>
                 <a href="#projects" onclick="closeMenu()" class="px-4 py-3 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-center font-medium">Projects</a>
                 <a href="#contact" onclick="closeMenu()" class="px-4 py-3 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-center font-medium">Contact</a>
             </nav>
@@ -458,7 +473,9 @@
             Notes App 📝
           </h3>
           <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-            A sleek and user-friendly web application for creating and managing notes with rich text support and local storage persistence.
+            Create and manage notes in a fast, user‑friendly interface.
+            Rich‑text formatting for clearer, more expressive content.
+            Autosaves to local storage for reliable, offline persistence.
           </p>
           </div>
         
@@ -487,7 +504,9 @@
             WeatherNow ☁️
           </h3>
           <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-            Live weather updates using OpenWeather API with sleek UI. Get real-time weather information with location-based accuracy and beautiful design.
+            Real‑time weather powered by OpenWeather in a clean, responsive UI.
+            Accurate, location‑based updates with timely details.
+            Fast, lightweight design for clear, at‑a‑glance forecasts.
           </p>
           </div>
         
@@ -573,7 +592,7 @@
       <div class="group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-gray-100 dark:border-gray-700 hover:border-purple-200 dark:hover:border-purple-800">
         <div class="mb-6">
           <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
-            Food Delivery Website 🍔🚚
+            Food Delivery Website 🍔
           </h3>
           <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
             A frontend-focused food delivery web app with responsive design. Users can browse menus, select items, and explore restaurants with modern UI.
@@ -601,6 +620,35 @@
     </div>
   </div>
 </div>
+
+<!-- Experience & Achievements Section -->
+<section id="experience" class="w-full px-[12%] py-16 scroll-mt-20">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-10">
+      <h2 class="text-4xl md:text-5xl font-Ovo mb-3">💼 Experience & Achievements</h2>
+      <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto font-Ovo">A glimpse of my professional journey and certifications in Web & AI/ML.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Work Experience List -->
+      <div>
+        <h3 class="text-2xl font-semibold mb-4 flex items-center gap-2"><span>💼</span> Work Experience</h3>
+        <div id="experienceList" class="space-y-4"></div>
+      </div>
+
+      <!-- Certifications List -->
+      <div>
+        <h3 class="text-2xl font-semibold mb-4 flex items-center gap-2"><span>📜</span> Certifications & Achievements</h3>
+        <div id="certList" class="space-y-4"></div>
+      </div>
+    </div>
+    
+    <!-- Unified View More Button -->
+    <div class="mt-8 flex justify-center">
+      <button id="toggleAllBtn" class="px-5 py-2 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:from-purple-700 hover:to-indigo-700 transition-colors w-full sm:w-auto">View More</button>
+    </div>
+  </div>
+</section>
 
     <!-- Contact Section -->
     <section id="contact" class="bg-white dark:bg-darkTheme py-12">
@@ -667,6 +715,20 @@
         </div>
       </div>
     </footer>
+
+    <!-- Certificate PDF Preview Modal -->
+    <div id="pdfModal" class="fixed inset-0 z-[60] hidden">
+      <!-- Backdrop -->
+      <div class="absolute inset-0 bg-black/60" onclick="closePdfPreview()"></div>
+      <!-- Modal content -->
+      <div class="relative mx-auto mt-10 h-[80vh] w-11/12 md:w-5/6 lg:w-3/4 bg-white dark:bg-gray-900 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+        <div class="flex items-center justify-between px-4 py-3 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+          <h3 class="font-semibold text-gray-800 dark:text-gray-100">Certificate Preview</h3>
+          <button class="px-3 py-1.5 rounded-md bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-100" onclick="closePdfPreview()">Close</button>
+        </div>
+        <iframe id="pdfFrame" src="" class="w-full h-full" title="Certificate PDF Preview"></iframe>
+      </div>
+    </div>
 
     
 <script src="./script.js"></script>
