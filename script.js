@@ -142,7 +142,8 @@ const experienceData = [
   duration: 'Aug 2025 - Oct 2025',
   description: 'Selected for a 6-week internship under the Edunet Foundation and AICTE SkillsBuild Program. Worked independently on a front-end web development project under mentorship guidance. Gained hands-on experience through masterclasses, project-based learning, and real-world problem solving using the SkillsBuild e-learning platform.',
   skills: ['HTML', 'CSS', 'JavaScript', 'Frontend Development', 'Project Management'],
-   offerLetterUrl: './images/AICTE(Front-End) offer_letter.pdf'
+   offerLetterUrl: './images/AICTE(Front-End) offer_letter.pdf',
+   completionCertificateUrl: './images/AICTE FWD.pdf'
 },
   {
   role: 'AI & Cloud Technology Intern',
@@ -150,7 +151,8 @@ const experienceData = [
   duration: 'Sept 2025 - Oct 2025',
   description: 'Completed a 4-week internship focused on Artificial Intelligence and Cloud Technology. Worked on project-based learning with mentor guidance, exploring real-world applications through the IBM SkillsBuild platform.',
   skills: ['Artificial Intelligence', 'Cloud Computing', 'Machine Learning', 'Python'],
-  offerLetterUrl: './images/AICTE B4 Offer Letter(AI).pdf'
+  offerLetterUrl: './images/AICTE B4 Offer Letter(AI).pdf',
+  completionCertificateUrl: './images/AICTE AI.pdf'
 }
 
  
