@@ -144,6 +144,8 @@ const experienceData = [
   skills: ['HTML', 'CSS', 'JavaScript', 'Frontend Development', 'Project Management'],
    offerLetterUrl: './images/AICTE(Front-End) offer_letter.pdf',
    completionCertificateUrl: './images/AICTE FWD.pdf'
+
+
 },
   {
   role: 'AI & Cloud Technology Intern',
