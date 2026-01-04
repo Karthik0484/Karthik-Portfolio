@@ -1,736 +1,1011 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karthik's Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="./tailwind.config.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Ovo&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Mobile-specific button styling for better visibility */
-        @media (max-width: 768px) {
-            .mobile-menu-btn {
-                background-color: white !important;
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
-                border: 1px solid #e5e7eb !important;
-                padding: 12px !important;
-                border-radius: 50% !important;
-                transition: all 0.3s ease !important;
-            }
-            
-            .dark .mobile-menu-btn {
-                background-color: #1f2937 !important;
-                border-color: #4b5563 !important;
-            }
-            
-            .mobile-menu-btn:hover {
-                background-color: #f9fafb !important;
-                transform: scale(1.05) !important;
-            }
-            
-            .dark .mobile-menu-btn:hover {
-                background-color: #374151 !important;
-            }
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Karthik's Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./tailwind.config.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Ovo&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Mobile-specific button styling for better visibility */
+    @media (max-width: 768px) {
+      .mobile-menu-btn {
+        background-color: white !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+        border: 1px solid #e5e7eb !important;
+        padding: 12px !important;
+        border-radius: 50% !important;
+        transition: all 0.3s ease !important;
+      }
 
-        /* Mobile floating menu styling */
-        #mobileMenu {
-            opacity: 0 !important;
-            transform: translateY(-10px) scale(0.95) !important;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-            pointer-events: none !important;
-        }
+      .dark .mobile-menu-btn {
+        background-color: #1f2937 !important;
+        border-color: #4b5563 !important;
+      }
 
-        #mobileMenu.show {
-            opacity: 1 !important;
-            transform: translateY(0) scale(1) !important;
-            pointer-events: auto !important;
-        }
+      .mobile-menu-btn:hover {
+        background-color: #f9fafb !important;
+        transform: scale(1.05) !important;
+      }
 
-        /* Mobile menu navigation links styling */
-        #mobileMenu nav a {
-            transition: all 0.2s ease !important;
-            border-radius: 8px !important;
-            margin: 2px 8px !important;
-        }
+      .dark .mobile-menu-btn:hover {
+        background-color: #374151 !important;
+      }
+    }
 
-        #mobileMenu nav a:hover {
-            background-color: #f3f4f6 !important;
-            transform: translateX(4px) !important;
-        }
+    /* Mobile floating menu styling */
+    #mobileMenu {
+      opacity: 0 !important;
+      transform: translateY(-10px) scale(0.95) !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      pointer-events: none !important;
+    }
 
-        .dark #mobileMenu nav a:hover {
-            background-color: #374151 !important;
-        }
+    #mobileMenu.show {
+      opacity: 1 !important;
+      transform: translateY(0) scale(1) !important;
+      pointer-events: auto !important;
+    }
 
-        /* Add a small arrow pointing up to the menu */
-        #mobileMenu::before {
-            content: '' !important;
-            position: absolute !important;
-            top: -8px !important;
-            right: 20px !important;
-            width: 0 !important;
-            height: 0 !important;
-            border-left: 8px solid transparent !important;
-            border-right: 8px solid transparent !important;
-            border-bottom: 8px solid white !important;
-        }
+    /* Mobile menu navigation links styling */
+    #mobileMenu nav a {
+      transition: all 0.2s ease !important;
+      border-radius: 8px !important;
+      margin: 2px 8px !important;
+    }
 
-        .dark #mobileMenu::before {
-            border-bottom-color: #1f2937 !important;
-        }
+    #mobileMenu nav a:hover {
+      background-color: #f3f4f6 !important;
+      transform: translateX(4px) !important;
+    }
 
-        /* Global scroll offset so sections don't hide under fixed navbar */
-        :root { --nav-height: 72px; }
-        /* Native anchor offset so headings sit exactly under the fixed navbar */
-        html { scroll-padding-top: var(--nav-height); }
-        #home,
-        #about,
-        #skills,
-        #experience,
-        #projects,
-        #contact {
-            scroll-margin-top: var(--nav-height);
-        }
-    </style>
+    .dark #mobileMenu nav a:hover {
+      background-color: #374151 !important;
+    }
+
+    /* Add a small arrow pointing up to the menu */
+    #mobileMenu::before {
+      content: '' !important;
+      position: absolute !important;
+      top: -8px !important;
+      right: 20px !important;
+      width: 0 !important;
+      height: 0 !important;
+      border-left: 8px solid transparent !important;
+      border-right: 8px solid transparent !important;
+      border-bottom: 8px solid white !important;
+    }
+
+    .dark #mobileMenu::before {
+      border-bottom-color: #1f2937 !important;
+    }
+
+    /* Global scroll offset so sections don't hide under fixed navbar */
+    :root {
+      --nav-height: 72px;
+    }
+
+    /* Native anchor offset so headings sit exactly under the fixed navbar */
+    html {
+      scroll-padding-top: var(--nav-height);
+    }
+
+    #home,
+    #about,
+    #skills,
+    #experience,
+    #projects,
+    #contact {
+      scroll-margin-top: var(--nav-height);
+    }
+  </style>
 </head>
+
 <body class="overflow-x-hidden font-Outfit leading-8 dark:bg-darkTheme dark:text-white">
-    <div class="fixed top-0 right-0 w-full md:w-11/12 -z-10 -translate-y-1/2 md:translate-y-[-80%] dark:hidden">
-        <img src="./images/gradient.png.png" alt="" class="w-full h-auto">
+  <div class="fixed top-0 right-0 w-full md:w-11/12 -z-10 -translate-y-1/2 md:translate-y-[-80%] dark:hidden">
+    <img src="./images/gradient.png.png" alt="" class="w-full h-auto">
+  </div>
+
+
+  <nav
+    class="w-full fixed px-4 sm:px-6 lg:px-8 py-3 md:py-4 flex items-center justify-between z-50 bg-white/80 dark:bg-darkTheme/80 backdrop-blur-sm">
+    <a href="#top" class="flex items-center">
+      <img src="./images/logo.png.png" alt="logo" class="w-24 md:w-28 h-auto cursor-pointer">
+    </a>
+
+    <!-- Desktop Navigation -->
+    <div class="hidden md:flex items-center space-x-1">
+      <ul
+        class="flex items-center space-x-2 lg:space-x-4 xl:space-x-6 rounded-full px-6 py-2 bg-white/80 shadow-sm font-Ovo dark:bg-gray-800/80 dark:border dark:border-white/10">
+        <li><a href="#top"
+            class="px-3 py-2 text-sm lg:text-base hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Home</a>
+        </li>
+        <li><a href="#about"
+            class="px-3 py-2 text-sm lg:text-base hover:text-purple-600 dark:hover:text-purple-400 transition-colors">About</a>
+        </li>
+        <li><a href="#skills"
+            class="px-3 py-2 text-sm lg:text-base hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Skills</a>
+        </li>
+        <li><a href="#projects"
+            class="px-3 py-2 text-sm lg:text-base hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Projects</a>
+        </li>
+        <li><a href="#experience"
+            class="px-3 py-2 text-sm lg:text-base hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Experience</a>
+        </li>
+        <li><a href="#contact"
+            class="px-3 py-2 text-sm lg:text-base hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Contact</a>
+        </li>
+      </ul>
+
+      <div class="flex items-center ml-2 space-x-2">
+        <button onclick="toggleTheme()"
+          class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+          <img src="./images/moon.png" alt="Toggle theme" class="w-5 h-5 dark:hidden">
+          <img src="./images/sun.png" alt="Toggle theme" class="w-5 h-5 hidden dark:block">
+        </button>
+        <a href="#contact"
+          class="hidden lg:flex items-center space-x-2 px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full hover:from-purple-700 hover:to-indigo-700 transition-colors">
+          <span>Contact Me</span>
+          <img src="./images/contact.png.png" alt="Contact" class="w-8 h-8 rounded-full">
+        </a>
+      </div>
     </div>
 
-    
-    <nav class="w-full fixed px-4 sm:px-6 lg:px-8 py-3 md:py-4 flex items-center justify-between z-50 bg-white/80 dark:bg-darkTheme/80 backdrop-blur-sm">
-        <a href="#top" class="flex items-center">
-            <img src="./images/logo.png.png" alt="logo" class="w-24 md:w-28 h-auto cursor-pointer">
+    <!-- Mobile menu button -->
+    <div class="flex md:hidden items-center space-x-3">
+      <button onclick="toggleTheme()"
+        class="mobile-menu-btn p-3 rounded-full bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-300 shadow-lg border border-gray-200 dark:border-gray-600 sm:p-2 sm:shadow-md">
+        <img src="./images/moon.png" alt="Toggle theme" class="w-6 h-6 dark:hidden sm:w-5 sm:h-5">
+        <img src="./images/sun.png" alt="Toggle theme" class="w-6 h-6 hidden dark:block sm:w-5 sm:h-5">
+      </button>
+      <button onclick="openMenu()"
+        class="mobile-menu-btn p-3 rounded-full bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-300 shadow-lg border border-gray-200 dark:border-gray-600 sm:p-2 sm:shadow-md">
+        <img src="./images/menu1.png" alt="Menu" class="w-7 h-7 sm:w-6 sm:h-6">
+      </button>
+    </div>
+
+    <!-- Mobile floating menu -->
+    <div id="mobileMenu"
+      class="absolute top-full right-0 mt-2 mr-4 z-50 hidden bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 py-2 min-w-[200px]">
+      <nav class="flex flex-col">
+        <a href="#top" onclick="closeMenu()"
+          class="px-4 py-3 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-center font-medium">Home</a>
+        <a href="#about" onclick="closeMenu()"
+          class="px-4 py-3 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-center font-medium">About</a>
+        <a href="#skills" onclick="closeMenu()"
+          class="px-4 py-3 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-center font-medium">Skills</a>
+        <a href="#projects" onclick="closeMenu()"
+          class="px-4 py-3 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-center font-medium">Projects</a>
+        <a href="#experience" onclick="closeMenu()"
+          class="px-4 py-3 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-center font-medium">Experience</a>
+        <a href="#contact" onclick="closeMenu()"
+          class="px-4 py-3 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-center font-medium">Contact</a>
+      </nav>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="min-h-screen flex items-center justify-center pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+      <div class="mb-8">
+        <div class="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full bg-white dark:bg-gray-800 p-1 shadow-lg">
+          <img src="./images/Profile.jpg" alt="Karthik" class="w-full h-full rounded-full object-cover">
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <h3
+          class="text-xl md:text-2xl font-Ovo text-gray-700 dark:text-gray-300 mb-4 flex items-center justify-center gap-2">
+          Hi! I'm Karthik <span class="text-2xl">👋</span>
+        </h3>
+        <h1
+          class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-Ovo font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-purple-400 dark:to-indigo-400 mb-6 leading-tight">
+          Software Developer
+        </h1>
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-Ovo text-gray-600 dark:text-gray-400 mb-6">
+          Web & AI/ML Enthusiast
+        </h2>
+      </div>
+
+      <p class="text-base md:text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed">
+        I'm a passionate Full-Stack Developer with a focus on Web Development and a growing interest in AI/ML.
+        I build responsive, user-friendly applications using modern technologies.
+      </p>
+
+      <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
+        <a href="#contact"
+          class="px-8 py-3.5 text-base font-medium text-white bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 dark:focus:ring-offset-gray-900 transition-all duration-300 flex items-center justify-center gap-2 group">
+          Get in Touch
+          <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
         </a>
 
-        <!-- Desktop Navigation -->
-        <div class="hidden md:flex items-center space-x-1">
-            <ul class="flex items-center space-x-2 lg:space-x-4 xl:space-x-6 rounded-full px-6 py-2 bg-white/80 shadow-sm font-Ovo dark:bg-gray-800/80 dark:border dark:border-white/10">
-                <li><a href="#top" class="px-3 py-2 text-sm lg:text-base hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Home</a></li>
-                <li><a href="#about" class="px-3 py-2 text-sm lg:text-base hover:text-purple-600 dark:hover:text-purple-400 transition-colors">About</a></li>
-                <li><a href="#skills" class="px-3 py-2 text-sm lg:text-base hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Skills</a></li>
-                <li><a href="#experience" class="px-3 py-2 text-sm lg:text-base hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Experience</a></li>
-                <li><a href="#projects" class="px-3 py-2 text-sm lg:text-base hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Projects</a></li>
-                <li><a href="#contact" class="px-3 py-2 text-sm lg:text-base hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Contact</a></li>
-            </ul>
-            
-            <div class="flex items-center ml-2 space-x-2">
-                <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-                    <img src="./images/moon.png" alt="Toggle theme" class="w-5 h-5 dark:hidden">
-                    <img src="./images/sun.png" alt="Toggle theme" class="w-5 h-5 hidden dark:block">
-                </button>
-                <a href="#contact" class="hidden lg:flex items-center space-x-2 px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full hover:from-purple-700 hover:to-indigo-700 transition-colors">
-                    <span>Contact Me</span>
-                    <img src="./images/contact.png.png" alt="Contact" class="w-8 h-8 rounded-full">
-                </a>
-            </div>
-        </div>
+        <a href="./images/Karthik-Resume..pdf" target="_blank"
+          class="px-8 py-3.5 text-base font-medium text-gray-800 dark:text-white bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 dark:focus:ring-offset-gray-900 transition-all duration-300 flex items-center justify-center gap-2 group">
+          <i class="far fa-file-alt text-purple-600 dark:text-purple-400"></i>
+          <span>View Resume</span>
+          <i class="fas fa-external-link-alt text-xs opacity-70 group-hover:translate-x-0.5 transition-transform"></i>
+        </a>
+      </div>
 
-        <!-- Mobile menu button -->
-        <div class="flex md:hidden items-center space-x-3">
-            <button onclick="toggleTheme()" class="mobile-menu-btn p-3 rounded-full bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-300 shadow-lg border border-gray-200 dark:border-gray-600 sm:p-2 sm:shadow-md">
-                <img src="./images/moon.png" alt="Toggle theme" class="w-6 h-6 dark:hidden sm:w-5 sm:h-5">
-                <img src="./images/sun.png" alt="Toggle theme" class="w-6 h-6 hidden dark:block sm:w-5 sm:h-5">
-            </button>
-            <button onclick="openMenu()" class="mobile-menu-btn p-3 rounded-full bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-300 shadow-lg border border-gray-200 dark:border-gray-600 sm:p-2 sm:shadow-md">
-                <img src="./images/menu1.png" alt="Menu" class="w-7 h-7 sm:w-6 sm:h-6">
-            </button>
-        </div>
+      <div class="mt-12 flex justify-center space-x-6">
+        <a href="https://github.com/Karthik0484" target="_blank"
+          class="text-gray-400 hover:text-gray-500 dark:hover:text-white transition-colors">
+          <span class="sr-only">GitHub</span>
+          <i class="fab fa-github text-2xl"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/karthik-k-573459278" target="_blank"
+          class="text-gray-400 hover:text-blue-500 transition-colors">
+          <span class="sr-only">LinkedIn</span>
+          <i class="fab fa-linkedin-in text-2xl"></i>
+        </a>
+        <a href="mailto:karthikofficial0484@gmail.com" class="text-gray-400 hover:text-red-500 transition-colors">
+          <span class="sr-only">Email</span>
+          <i class="far fa-envelope text-2xl"></i>
+        </a>
+      </div>
+    </div>
+  </section>
 
-        <!-- Mobile floating menu -->
-        <div id="mobileMenu" class="absolute top-full right-0 mt-2 mr-4 z-50 hidden bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 py-2 min-w-[200px]">
-            <nav class="flex flex-col">
-                <a href="#top" onclick="closeMenu()" class="px-4 py-3 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-center font-medium">Home</a>
-                <a href="#about" onclick="closeMenu()" class="px-4 py-3 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-center font-medium">About</a>
-                <a href="#skills" onclick="closeMenu()" class="px-4 py-3 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-center font-medium">Skills</a>
-                <a href="#experience" onclick="closeMenu()" class="px-4 py-3 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-center font-medium">Experience</a>
-                <a href="#projects" onclick="closeMenu()" class="px-4 py-3 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-center font-medium">Projects</a>
-                <a href="#contact" onclick="closeMenu()" class="px-4 py-3 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-center font-medium">Contact</a>
-            </nav>
-        </div>
-    </nav>
+  <!---- ---------About---------- ----->
+  <section id="about" class="w-full px-[12%] pt-36 pb-16 scroll-mt-20">
+    <h4 class="text-center mb-2 text-lg font-Ovo">Introduction</h4>
+    <h2 class="text-center text-5xl font-Ovo">🙋‍♂️ About Me</h2>
 
-    <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center pt-24 pb-20 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-            <div class="mb-8">
-                <div class="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full bg-white dark:bg-gray-800 p-1 shadow-lg">
-                    <img src="./images/Profile.jpg" alt="Karthik" class="w-full h-full rounded-full object-cover">
-                </div>
-            </div>
-            
-            <div class="mb-6">
-                <h3 class="text-xl md:text-2xl font-Ovo text-gray-700 dark:text-gray-300 mb-4 flex items-center justify-center gap-2">
-                    Hi! I'm Karthik <span class="text-2xl">👋</span>
-                </h3>
-                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-Ovo font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-purple-400 dark:to-indigo-400 mb-6 leading-tight">
-                    Software Developer
-                </h1>
-                <h2 class="text-xl sm:text-2xl md:text-3xl font-Ovo text-gray-600 dark:text-gray-400 mb-6">
-                    Web & AI/ML Enthusiast
-                </h2>
-            </div>
+    <div class="flex w-full flex-col lg:flex-row items-center gap-20 my-20 mt-20">
+      <div class="max-w-max mx-auto relative">
+        <img src="./images/About.png" alt="" class="w-64 sm:w-80 rounded-3xl max-w-none h-300">
 
-            <p class="text-base md:text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed">
-                I'm a passionate Full-Stack Developer with a focus on Web Development and a growing interest in AI/ML. 
-                I build responsive, user-friendly applications using modern technologies.
-            </p>
-
-            <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
-                <a href="#contact" 
-                   class="px-8 py-3.5 text-base font-medium text-white bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 dark:focus:ring-offset-gray-900 transition-all duration-300 flex items-center justify-center gap-2 group">
-                    Get in Touch
-                    <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
-                </a>
-                
-                <a href="./images/Karthik-Resume..pdf" target="_blank" 
-                   class="px-8 py-3.5 text-base font-medium text-gray-800 dark:text-white bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 dark:focus:ring-offset-gray-900 transition-all duration-300 flex items-center justify-center gap-2 group">
-                    <i class="far fa-file-alt text-purple-600 dark:text-purple-400"></i>
-                    <span>View Resume</span>
-                    <i class="fas fa-external-link-alt text-xs opacity-70 group-hover:translate-x-0.5 transition-transform"></i>
-                </a>
-            </div>
-
-            <div class="mt-12 flex justify-center space-x-6">
-                <a href="https://github.com/Karthik0484" target="_blank" class="text-gray-400 hover:text-gray-500 dark:hover:text-white transition-colors">
-                    <span class="sr-only">GitHub</span>
-                    <i class="fab fa-github text-2xl"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/karthik-k-573459278" target="_blank" class="text-gray-400 hover:text-blue-500 transition-colors">
-                    <span class="sr-only">LinkedIn</span>
-                    <i class="fab fa-linkedin-in text-2xl"></i>
-                </a>
-                <a href="mailto:karthikofficial0484@gmail.com" class="text-gray-400 hover:text-red-500 transition-colors">
-                    <span class="sr-only">Email</span>
-                    <i class="far fa-envelope text-2xl"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!---- ---------About---------- ----->
-    <div id="about" class="w-full px-[12%] py-10 scroll-mt-20">
-        <h4 class="text-center mb-2 text-lg font-Ovo">Introduction</h4>
-        <h2 class="text-center text-5xl font-Ovo">🙋‍♂️ About Me</h2>
-
-        <div class="flex w-full flex-col lg:flex-row items-center gap-20 my-20 mt-20">
-            <div class="max-w-max mx-auto relative">
-                <img src="./images/About.png" alt="" class="w-64 sm:w-80 rounded-3xl max-w-none h-300">
-                
-                <div class="bg-white w-1/2 aspect-square absolute right-0 bottom-0 rounded-full translate-x-1/4 translate-y-1/3
+        <div class="bg-white w-1/2 aspect-square absolute right-0 bottom-0 rounded-full translate-x-1/4 translate-y-1/3
                 shadow-[0_4px_55px_rgba(149,0,162,0.15)] flex items-center justify-center ">
-                <img src="./images/Aboutlogo2.png" alt="" class="w-full rounded-full mt-0  animate-spin_slow ">
+          <img src="./images/Aboutlogo2.png" alt="" class="w-full rounded-full mt-0  animate-spin_slow ">
 
-                <img src="./images/programmer.png" alt="programmer" class="w-1/4 absolute top-1/2 left-1/2
+          <img src="./images/programmer.png" alt="programmer" class="w-1/4 absolute top-1/2 left-1/2
                  -translate-x-1/2 -translate-y-1/2 ">
 
-                </div>
-            </div>
-            <div class="flex-1">
-                <p class="mb-10 max-w-2xl font-Ovo">
-                    👋 Hey there! I’m Karthik K — a passionate 💻 Full-Stack Developer and curious explorer in the world of AI/ML 🤖. 
-                    I love building things that live on the internet — from responsive web apps to smart solutions that make life easier!
-                    <br>
-                    🌐 I specialize in React, Node.js, and MongoDB, crafting full-stack applications with clean UI and solid functionality. 
-                    I’ve built real-time chat apps, smart recommendation systems, and interactive mini-projects — all from the ground up.
-                    <br>
-                    🎯 My goal? To keep learning, keep building, and one day contribute to something that impacts millions.
-                    Let’s connect and create something amazing! 🚀
+        </div>
+      </div>
+      <div class="flex-1">
+        <p class="mb-10 max-w-2xl font-Ovo">
+          👋 Hey there! I’m Karthik K — a passionate 💻 Full-Stack Developer and curious explorer in the world of AI/ML
+          🤖.
+          I love building things that live on the internet — from responsive web apps to smart solutions that make life
+          easier!
+          <br>
+          🌐 I specialize in React, Node.js, and MongoDB, crafting full-stack applications with clean UI and solid
+          functionality.
+          I’ve built real-time chat apps, smart recommendation systems, and interactive mini-projects — all from the
+          ground up.
+          <br>
+          🎯 My goal? To keep learning, keep building, and one day contribute to something that impacts millions.
+          Let’s connect and create something amazing! 🚀
 
 
-                </p>
+        </p>
 
-                <ul class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl">
-                    <li class="border-[0.5px] border-gray-400 rounded-xl p-6 cursor-pointer hover:bg-lightHover
+        <ul class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl">
+          <li class="border-[0.5px] border-gray-400 rounded-xl p-6 cursor-pointer hover:bg-lightHover
                      hover:-translate-y-1 duration-500 hover:shadow-black 
                      dark:border-white dark:hover:shadow-white dark:hover:bg-darkHover/50
                      ">
-                        <img src="./images/code.png" alt="" class="w-7 mt-3">
-                        <h3 class="my-5 font-semibold text-gray-700 dark:text-white">Languages</h3>
-                        <p class="text-gray-600 text-sm dark:text-white/80">HTML, CSS, JavaScript, React.js, Node.js, Python, Core Java — the tools I use to build magic on the web ✨.</p>
-                    </li>
-                    <li class="border-[0.5px] border-gray-400 rounded-xl p-6 cursor-pointer hover:bg-lightHover
+            <img src="./images/code.png" alt="" class="w-7 mt-3">
+            <h3 class="my-5 font-semibold text-gray-700 dark:text-white">Languages</h3>
+            <p class="text-gray-600 text-sm dark:text-white/80">HTML, CSS, JavaScript, React.js, Node.js, Python, Core
+              Java — the tools I use to build magic on the web ✨.</p>
+          </li>
+          <li class="border-[0.5px] border-gray-400 rounded-xl p-6 cursor-pointer hover:bg-lightHover
                      hover:-translate-y-1 duration-500 hover:shadow-black
                      dark:border-white dark:hover:shadow-white dark:hover:bg-darkHover/50">
-                        <img src="./images/edu.png" alt="" class="w-7 mt-3">
-                        <h3 class="my-5 font-semibold text-gray-700 dark:text-white">Education</h3>
-                        <p class="text-gray-600 text-sm dark:text-white/80">Pursuing B.Tech in Information Technology — where passion meets purpose in the world of tech 📚.</p>
-                    </li>
-                    <li class="border-[0.5px] border-gray-400 rounded-xl p-6 cursor-pointer hover:bg-lightHover
+            <img src="./images/edu.png" alt="" class="w-7 mt-3">
+            <h3 class="my-5 font-semibold text-gray-700 dark:text-white">Education</h3>
+            <p class="text-gray-600 text-sm dark:text-white/80">Pursuing B.Tech in Information Technology — where
+              passion meets purpose in the world of tech 📚.</p>
+          </li>
+          <li class="border-[0.5px] border-gray-400 rounded-xl p-6 cursor-pointer hover:bg-lightHover
                      hover:-translate-y-1 duration-500 hover:shadow-black
                      dark:border-white dark:hover:shadow-white dark:hover:bg-darkHover/50">
-                        <img src="./images/project.png" alt="" class="w-7 mt-3">
-                        <h3 class="my-5 font-semibold text-gray-700 dark:text-white">Projects</h3>
-                        <p class="text-gray-600 text-sm dark:text-white/80">Crafted 5+ interactive projects — from chat apps to AI-based recommendation. Every project, a new adventure! </p>
-                    </li>
-                </ul>
+            <img src="./images/project.png" alt="" class="w-7 mt-3">
+            <h3 class="my-5 font-semibold text-gray-700 dark:text-white">Projects</h3>
+            <p class="text-gray-600 text-sm dark:text-white/80">Crafted 5+ interactive projects — from chat apps to
+              AI-based recommendation. Every project, a new adventure! </p>
+          </li>
+        </ul>
 
-                <h4 class="my-3 text-gray-700 font-Ovo dark:text-white/80">Tools I Use..</h4>
+        <h4 class="my-3 text-gray-700 font-Ovo dark:text-white/80">Tools I Use..</h4>
 
-                <ul class="flex items-center gap-3 sm:gap-5">
-                    <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer 
+        <ul class="flex items-center gap-3 sm:gap-5">
+          <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer 
                     hover:-translate-y-1 duration-500">
-                        <img src="./images/vscode.png" alt="vs code" class="w-5 sm:w-7 rounded-full">
-                    </li>
-                    <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer 
+            <img src="./images/vscode.png" alt="vs code" class="w-5 sm:w-7 rounded-full">
+          </li>
+          <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer 
                     hover:-translate-y-1 duration-500">
-                        <img src="./images/mongodb.png" alt="vs code" class="w-5 sm:w-7 rounded-full">
-                    </li>
-                    <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer 
+            <img src="./images/mongodb.png" alt="vs code" class="w-5 sm:w-7 rounded-full">
+          </li>
+          <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer 
                     hover:-translate-y-1 duration-500">
-                        <img src="./images/firebase.png" alt="vs code" class="w-5 sm:w-7 rounded-full">
-                    </li>
-                    <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer 
+            <img src="./images/firebase.png" alt="vs code" class="w-5 sm:w-7 rounded-full">
+          </li>
+          <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer 
                     hover:-translate-y-1 duration-500">
-                        <img src="./images/git.png" alt="vs code" class="w-5 sm:w-7 rounded-full">
-                    </li>
-                    <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer 
+            <img src="./images/git.png" alt="vs code" class="w-5 sm:w-7 rounded-full">
+          </li>
+          <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer 
                     hover:-translate-y-1 duration-500">
-                        <img src="./images/bootstrap.png" alt="vs code" class="w-5 sm:w-7 ">
-                    </li>
-                </ul>
+            <img src="./images/bootstrap.png" alt="vs code" class="w-5 sm:w-7 ">
+          </li>
+        </ul>
 
-            </div>
-        </div>
+      </div>
     </div>
+  </section>
   <!--- -------skills------ ----->
-  <div id="skills" class="w-full px-[12%] py-16 scroll-mt-20">
+  <div id="skills" class="w-full px-[12%] pt-36 pb-16 scroll-mt-20">
     <div class="max-w-7xl mx-auto">
       <h4 class="text-center mb-2 text-lg font-Ovo black-600 dark:black-400">What I Learned..</h4>
       <h2 class="text-center text-5xl font-Ovo mb-4">💡 My Skills</h2>
       <p class="text-center mb-12 max-w-2xl mx-auto text-gray-600 dark:text-gray-300 font-Ovo">
-        🚀 Hey there! I'm a passionate full-stack developer with a strong interest in building modern, scalable, and visually stunning web applications.Over my journey, I've worked with various technologies — from front-end design 🎨 to back-end logic ⚙️ — and even explored the world of AI/ML 🤖. I use tools like React, Node.js, MongoDB, Git, Python, and scikit-learn to turn ideas into real-world applications. Here's a quick overview of my technical skills.
+        🚀 Hey there! I'm a passionate full-stack developer with a strong interest in building modern, scalable, and
+        visually stunning web applications.Over my journey, I've worked with various technologies — from front-end
+        design 🎨 to back-end logic ⚙️ — and even explored the world of AI/ML 🤖. I use tools like React, Node.js,
+        MongoDB, Git, Python, and scikit-learn to turn ideas into real-world applications. Here's a quick overview of
+        my
+        technical skills.
       </p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Frontend Skills -->
-        <div class="group bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-500 border border-gray-100 dark:border-gray-700 hover:border-blue-200 dark:hover:border-blue-900/50 hover:-translate-y-1">
+        <div
+          class="group bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-500 border border-gray-100 dark:border-gray-700 hover:border-blue-200 dark:hover:border-blue-900/50 hover:-translate-y-1">
           <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center group-hover:bg-blue-200 dark:group-hover:bg-blue-800/70 transition-colors duration-300">
+            <div
+              class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center group-hover:bg-blue-200 dark:group-hover:bg-blue-800/70 transition-colors duration-300">
               <span class="text-xl group-hover:scale-110 transition-transform duration-300">🌐</span>
             </div>
-            <h3 class="text-xl font-bold text-gray-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">Frontend</h3>
+            <h3
+              class="text-xl font-bold text-gray-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+              Frontend</h3>
           </div>
           <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1.5 bg-orange-100 text-orange-800 text-sm font-medium rounded-full dark:bg-orange-900/50 dark:text-orange-300 hover:scale-105 hover:shadow-md hover:shadow-orange-200 dark:hover:shadow-orange-900/30 transition-all duration-300 flex items-center gap-1.5 group">
+            <span
+              class="px-3 py-1.5 bg-orange-100 text-orange-800 text-sm font-medium rounded-full dark:bg-orange-900/50 dark:text-orange-300 hover:scale-105 hover:shadow-md hover:shadow-orange-200 dark:hover:shadow-orange-900/30 transition-all duration-300 flex items-center gap-1.5 group">
               <span class="group-hover:animate-bounce">🔷</span> HTML5
             </span>
-            <span class="px-3 py-1.5 bg-blue-100 text-blue-800 text-sm font-medium rounded-full dark:bg-blue-900/50 dark:text-blue-300 hover:scale-105 hover:shadow-md hover:shadow-blue-200 dark:hover:shadow-blue-900/30 transition-all duration-300 flex items-center gap-1.5 group">
+            <span
+              class="px-3 py-1.5 bg-blue-100 text-blue-800 text-sm font-medium rounded-full dark:bg-blue-900/50 dark:text-blue-300 hover:scale-105 hover:shadow-md hover:shadow-blue-200 dark:hover:shadow-blue-900/30 transition-all duration-300 flex items-center gap-1.5 group">
               <span class="group-hover:animate-bounce">🎨</span> CSS3
             </span>
-            <span class="px-3 py-1.5 bg-yellow-100 text-yellow-800 text-sm font-medium rounded-full dark:bg-yellow-900/50 dark:text-yellow-300 hover:scale-105 hover:shadow-md hover:shadow-yellow-200 dark:hover:shadow-yellow-900/30 transition-all duration-300 flex items-center gap-1.5 group">
+            <span
+              class="px-3 py-1.5 bg-yellow-100 text-yellow-800 text-sm font-medium rounded-full dark:bg-yellow-900/50 dark:text-yellow-300 hover:scale-105 hover:shadow-md hover:shadow-yellow-200 dark:hover:shadow-yellow-900/30 transition-all duration-300 flex items-center gap-1.5 group">
               <span class="group-hover:animate-bounce">⚡</span> JavaScript
             </span>
-            <span class="px-3 py-1.5 bg-cyan-100 text-cyan-800 text-sm font-medium rounded-full dark:bg-cyan-900/50 dark:text-cyan-300 hover:scale-105 hover:shadow-md hover:shadow-cyan-200 dark:hover:shadow-cyan-900/30 transition-all duration-300 flex items-center gap-1.5 group">
+            <span
+              class="px-3 py-1.5 bg-cyan-100 text-cyan-800 text-sm font-medium rounded-full dark:bg-cyan-900/50 dark:text-cyan-300 hover:scale-105 hover:shadow-md hover:shadow-cyan-200 dark:hover:shadow-cyan-900/30 transition-all duration-300 flex items-center gap-1.5 group">
               <span class="group-hover:animate-bounce">⚛️</span> React
             </span>
-            <span class="px-3 py-1.5 bg-teal-100 text-teal-800 text-sm font-medium rounded-full dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 hover:shadow-md hover:shadow-teal-200 dark:hover:shadow-teal-900/30 transition-all duration-300 flex items-center gap-1.5 group">
+            <span
+              class="px-3 py-1.5 bg-teal-100 text-teal-800 text-sm font-medium rounded-full dark:bg-teal-900/50 dark:text-teal-300 hover:scale-105 hover:shadow-md hover:shadow-teal-200 dark:hover:shadow-teal-900/30 transition-all duration-300 flex items-center gap-1.5 group">
               <span class="group-hover:animate-bounce">🎨</span> Tailwind CSS
             </span>
-            <span class="px-3 py-1.5 bg-purple-100 text-purple-800 text-sm font-medium rounded-full dark:bg-purple-900/50 dark:text-purple-300 hover:scale-105 hover:shadow-md hover:shadow-purple-200 dark:hover:shadow-purple-900/30 transition-all duration-300 flex items-center gap-1.5 group">
+            <span
+              class="px-3 py-1.5 bg-purple-100 text-purple-800 text-sm font-medium rounded-full dark:bg-purple-900/50 dark:text-purple-300 hover:scale-105 hover:shadow-md hover:shadow-purple-200 dark:hover:shadow-purple-900/30 transition-all duration-300 flex items-center gap-1.5 group">
               <span class="group-hover:animate-bounce">🅱️</span> Bootstrap
             </span>
           </div>
         </div>
 
         <!-- Backend Skills -->
-        <div class="group bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-500 border border-gray-100 dark:border-gray-700 hover:border-green-200 dark:hover:border-green-900/50 hover:-translate-y-1">
+        <div
+          class="group bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-500 border border-gray-100 dark:border-gray-700 hover:border-green-200 dark:hover:border-green-900/50 hover:-translate-y-1">
           <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-900/50 flex items-center justify-center group-hover:bg-green-200 dark:group-hover:bg-green-800/70 transition-colors duration-300">
+            <div
+              class="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-900/50 flex items-center justify-center group-hover:bg-green-200 dark:group-hover:bg-green-800/70 transition-colors duration-300">
               <span class="text-xl group-hover:rotate-12 transition-transform duration-300">⚙️</span>
             </div>
-            <h3 class="text-xl font-bold text-gray-800 dark:text-white group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors duration-300">Backend</h3>
+            <h3
+              class="text-xl font-bold text-gray-800 dark:text-white group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors duration-300">
+              Backend</h3>
           </div>
           <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1.5 bg-green-100 text-green-800 text-sm font-medium rounded-full dark:bg-green-900/50 dark:text-green-300 hover:scale-105 hover:shadow-md hover:shadow-green-200 dark:hover:shadow-green-900/30 transition-all duration-300 flex items-center gap-1.5 group">
+            <span
+              class="px-3 py-1.5 bg-green-100 text-green-800 text-sm font-medium rounded-full dark:bg-green-900/50 dark:text-green-300 hover:scale-105 hover:shadow-md hover:shadow-green-200 dark:hover:shadow-green-900/30 transition-all duration-300 flex items-center gap-1.5 group">
               <span class="group-hover:animate-pulse">🟢</span> Node.js
             </span>
-            <span class="px-3 py-1.5 bg-gray-100 text-gray-800 text-sm font-medium rounded-full dark:bg-gray-700/50 dark:text-gray-300 hover:scale-105 hover:shadow-md hover:shadow-gray-200 dark:hover:shadow-gray-700/30 transition-all duration-300 flex items-center gap-1.5 group">
+            <span
+              class="px-3 py-1.5 bg-gray-100 text-gray-800 text-sm font-medium rounded-full dark:bg-gray-700/50 dark:text-gray-300 hover:scale-105 hover:shadow-md hover:shadow-gray-200 dark:hover:shadow-gray-700/30 transition-all duration-300 flex items-center gap-1.5 group">
               <span class="group-hover:animate-pulse">🚀</span> Express
             </span>
-            <span class="px-3 py-1.5 bg-gray-200 text-gray-800 text-sm font-medium rounded-full dark:bg-gray-600/50 dark:text-gray-300 hover:scale-105 hover:shadow-md hover:shadow-gray-200 dark:hover:shadow-gray-600/30 transition-all duration-300 flex items-center gap-1.5 group">
+            <span
+              class="px-3 py-1.5 bg-gray-200 text-gray-800 text-sm font-medium rounded-full dark:bg-gray-600/50 dark:text-gray-300 hover:scale-105 hover:shadow-md hover:shadow-gray-200 dark:hover:shadow-gray-600/30 transition-all duration-300 flex items-center gap-1.5 group">
               <span class="group-hover:animate-pulse">🍵</span> Flask
             </span>
-            <span class="px-3 py-1.5 bg-green-100 text-green-800 text-sm font-medium rounded-full dark:bg-green-900/50 dark:text-green-300 hover:scale-105 hover:shadow-md hover:shadow-green-200 dark:hover:shadow-green-900/30 transition-all duration-300 flex items-center gap-1.5 group">
+            <span
+              class="px-3 py-1.5 bg-green-100 text-green-800 text-sm font-medium rounded-full dark:bg-green-900/50 dark:text-green-300 hover:scale-105 hover:shadow-md hover:shadow-green-200 dark:hover:shadow-green-900/30 transition-all duration-300 flex items-center gap-1.5 group">
               <span class="group-hover:animate-pulse">🗄️</span> MongoDB
             </span>
-            <span class="px-3 py-1.5 bg-blue-100 text-blue-800 text-sm font-medium rounded-full dark:bg-blue-900/50 dark:text-blue-300 hover:scale-105 hover:shadow-md hover:shadow-blue-200 dark:hover:shadow-blue-900/30 transition-all duration-300 flex items-center gap-1.5 group">
+            <span
+              class="px-3 py-1.5 bg-blue-100 text-blue-800 text-sm font-medium rounded-full dark:bg-blue-900/50 dark:text-blue-300 hover:scale-105 hover:shadow-md hover:shadow-blue-200 dark:hover:shadow-blue-900/30 transition-all duration-300 flex items-center gap-1.5 group">
               <span class="group-hover:animate-pulse">🔌</span> RESTful APIs
             </span>
-            <span class="px-3 py-1.5 bg-purple-100 text-purple-800 text-sm font-medium rounded-full dark:bg-purple-900/50 dark:text-purple-300 hover:scale-105 hover:shadow-md hover:shadow-purple-200 dark:hover:shadow-purple-900/30 transition-all duration-300 flex items-center gap-1.5 group">
+            <span
+              class="px-3 py-1.5 bg-purple-100 text-purple-800 text-sm font-medium rounded-full dark:bg-purple-900/50 dark:text-purple-300 hover:scale-105 hover:shadow-md hover:shadow-purple-200 dark:hover:shadow-purple-900/30 transition-all duration-300 flex items-center gap-1.5 group">
               <span class="group-hover:animate-pulse">🔑</span> JWT Auth
             </span>
           </div>
         </div>
 
         <!-- AI/ML Skills -->
-        <div class="group bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-500 border border-gray-100 dark:border-gray-700 hover:border-yellow-200 dark:hover:border-yellow-900/50 hover:-translate-y-1">
+        <div
+          class="group bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-500 border border-gray-100 dark:border-gray-700 hover:border-yellow-200 dark:hover:border-yellow-900/50 hover:-translate-y-1">
           <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 rounded-lg bg-yellow-100 dark:bg-yellow-900/50 flex items-center justify-center group-hover:bg-yellow-200 dark:group-hover:bg-yellow-800/70 transition-colors duration-300">
+            <div
+              class="w-10 h-10 rounded-lg bg-yellow-100 dark:bg-yellow-900/50 flex items-center justify-center group-hover:bg-yellow-200 dark:group-hover:bg-yellow-800/70 transition-colors duration-300">
               <span class="text-xl group-hover:rotate-12 transition-transform duration-300">🤖</span>
             </div>
-            <h3 class="text-xl font-bold text-gray-800 dark:text-white group-hover:text-yellow-600 dark:group-hover:text-yellow-400 transition-colors duration-300">AI/ML</h3>
+            <h3
+              class="text-xl font-bold text-gray-800 dark:text-white group-hover:text-yellow-600 dark:group-hover:text-yellow-400 transition-colors duration-300">
+              AI/ML</h3>
           </div>
           <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1.5 bg-yellow-100 text-yellow-800 text-sm font-medium rounded-full dark:bg-yellow-900/50 dark:text-yellow-300 hover:scale-105 hover:shadow-md hover:shadow-yellow-200 dark:hover:shadow-yellow-900/30 transition-all duration-300 flex items-center gap-1.5 group">
+            <span
+              class="px-3 py-1.5 bg-yellow-100 text-yellow-800 text-sm font-medium rounded-full dark:bg-yellow-900/50 dark:text-yellow-300 hover:scale-105 hover:shadow-md hover:shadow-yellow-200 dark:hover:shadow-yellow-900/30 transition-all duration-300 flex items-center gap-1.5 group">
               <span class="group-hover:animate-spin">🐍</span> Python
             </span>
-            <span class="px-3 py-1.5 bg-blue-100 text-blue-800 text-sm font-medium rounded-full dark:bg-blue-900/50 dark:text-blue-300 hover:scale-105 hover:shadow-md hover:shadow-blue-200 dark:hover:shadow-blue-900/30 transition-all duration-300 flex items-center gap-1.5 group">
+            <span
+              class="px-3 py-1.5 bg-blue-100 text-blue-800 text-sm font-medium rounded-full dark:bg-blue-900/50 dark:text-blue-300 hover:scale-105 hover:shadow-md hover:shadow-blue-200 dark:hover:shadow-blue-900/30 transition-all duration-300 flex items-center gap-1.5 group">
               <span class="group-hover:animate-pulse">🐼</span> Pandas
             </span>
-            <span class="px-3 py-1.5 bg-indigo-100 text-indigo-800 text-sm font-medium rounded-full dark:bg-indigo-900/50 dark:text-indigo-300 hover:scale-105 hover:shadow-md hover:shadow-indigo-200 dark:hover:shadow-indigo-900/30 transition-all duration-300 flex items-center gap-1.5 group">
+            <span
+              class="px-3 py-1.5 bg-indigo-100 text-indigo-800 text-sm font-medium rounded-full dark:bg-indigo-900/50 dark:text-indigo-300 hover:scale-105 hover:shadow-md hover:shadow-indigo-200 dark:hover:shadow-indigo-900/30 transition-all duration-300 flex items-center gap-1.5 group">
               <span class="group-hover:animate-pulse">🔢</span> NumPy
             </span>
-            <span class="px-3 py-1.5 bg-orange-100 text-orange-800 text-sm font-medium rounded-full dark:bg-orange-900/50 dark:text-orange-300 hover:scale-105 hover:shadow-md hover:shadow-orange-200 dark:hover:shadow-orange-900/30 transition-all duration-300 flex items-center gap-1.5 group">
+            <span
+              class="px-3 py-1.5 bg-orange-100 text-orange-800 text-sm font-medium rounded-full dark:bg-orange-900/50 dark:text-orange-300 hover:scale-105 hover:shadow-md hover:shadow-orange-200 dark:hover:shadow-orange-900/30 transition-all duration-300 flex items-center gap-1.5 group">
               <span class="group-hover:animate-pulse">📊</span> Scikit-learn
             </span>
-            <span class="px-3 py-1.5 bg-orange-200 text-orange-800 text-sm font-medium rounded-full dark:bg-orange-800/50 dark:text-orange-200 hover:scale-105 hover:shadow-md hover:shadow-orange-200 dark:hover:shadow-orange-800/30 transition-all duration-300 flex items-center gap-1.5 group">
+            <span
+              class="px-3 py-1.5 bg-orange-200 text-orange-800 text-sm font-medium rounded-full dark:bg-orange-800/50 dark:text-orange-200 hover:scale-105 hover:shadow-md hover:shadow-orange-200 dark:hover:shadow-orange-800/30 transition-all duration-300 flex items-center gap-1.5 group">
               <span class="group-hover:animate-pulse">🧠</span> TensorFlow
             </span>
-           
+
           </div>
         </div>
 
         <!-- Tools -->
-        <div class="group bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-500 border border-gray-100 dark:border-gray-700 hover:border-red-200 dark:hover:border-red-900/50 hover:-translate-y-1">
+        <div
+          class="group bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-500 border border-gray-100 dark:border-gray-700 hover:border-red-200 dark:hover:border-red-900/50 hover:-translate-y-1">
           <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-900/50 flex items-center justify-center group-hover:bg-red-200 dark:group-hover:bg-red-800/70 transition-colors duration-300">
+            <div
+              class="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-900/50 flex items-center justify-center group-hover:bg-red-200 dark:group-hover:bg-red-800/70 transition-colors duration-300">
               <span class="text-xl group-hover:rotate-12 transition-transform duration-300">🛠️</span>
             </div>
-            <h3 class="text-xl font-bold text-gray-800 dark:text-white group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors duration-300">Tools</h3>
+            <h3
+              class="text-xl font-bold text-gray-800 dark:text-white group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors duration-300">
+              Tools</h3>
           </div>
           <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1.5 bg-orange-100 text-orange-800 text-sm font-medium rounded-full dark:bg-orange-900/50 dark:text-orange-300 hover:scale-105 hover:shadow-md hover:shadow-orange-200 dark:hover:shadow-orange-900/30 transition-all duration-300 flex items-center gap-1.5 group">
+            <span
+              class="px-3 py-1.5 bg-orange-100 text-orange-800 text-sm font-medium rounded-full dark:bg-orange-900/50 dark:text-orange-300 hover:scale-105 hover:shadow-md hover:shadow-orange-200 dark:hover:shadow-orange-900/30 transition-all duration-300 flex items-center gap-1.5 group">
               <span class="group-hover:animate-bounce">🐙</span> Git
             </span>
-            <span class="px-3 py-1.5 bg-gray-800 text-white text-sm font-medium rounded-full dark:bg-gray-300 dark:text-gray-800 hover:scale-105 hover:shadow-md hover:shadow-gray-800/30 dark:hover:shadow-gray-300/30 transition-all duration-300 flex items-center gap-1.5 group">
+            <span
+              class="px-3 py-1.5 bg-gray-800 text-white text-sm font-medium rounded-full dark:bg-gray-300 dark:text-gray-800 hover:scale-105 hover:shadow-md hover:shadow-gray-800/30 dark:hover:shadow-gray-300/30 transition-all duration-300 flex items-center gap-1.5 group">
               <span class="group-hover:animate-bounce">💻</span> GitHub
             </span>
-            <span class="px-3 py-1.5 bg-blue-100 text-blue-800 text-sm font-medium rounded-full dark:bg-blue-900/50 dark:text-blue-300 hover:scale-105 hover:shadow-md hover:shadow-blue-200 dark:hover:shadow-blue-900/30 transition-all duration-300 flex items-center gap-1.5 group">
+            <span
+              class="px-3 py-1.5 bg-blue-100 text-blue-800 text-sm font-medium rounded-full dark:bg-blue-900/50 dark:text-blue-300 hover:scale-105 hover:shadow-md hover:shadow-blue-200 dark:hover:shadow-blue-900/30 transition-all duration-300 flex items-center gap-1.5 group">
               <span class="group-hover:animate-bounce">👨‍💻</span> VS Code
             </span>
-            <span class="px-3 py-1.5 bg-orange-100 text-orange-800 text-sm font-medium rounded-full dark:bg-orange-900/50 dark:text-orange-300 hover:scale-105 hover:shadow-md hover:shadow-orange-200 dark:hover:shadow-orange-900/30 transition-all duration-300 flex items-center gap-1.5 group">
+            <span
+              class="px-3 py-1.5 bg-orange-100 text-orange-800 text-sm font-medium rounded-full dark:bg-orange-900/50 dark:text-orange-300 hover:scale-105 hover:shadow-md hover:shadow-orange-200 dark:hover:shadow-orange-900/30 transition-all duration-300 flex items-center gap-1.5 group">
               <span class="group-hover:animate-bounce">📡</span> Postman
             </span>
-           
-          </div>
-        </div>
-      </div>
-    </div>
-</div>
 
-<!--- ---------Projects------------>
-<div id="projects" class="w-full px-[12%] py-16 scroll-mt-20 dark:bg-gradient-to-b dark:from-darkTheme dark:to-[#1a0a2e]">
-  <div class="max-w-7xl mx-auto">
-    <h4 class="text-center mb-2 text-lg font-Ovo text-purple-600 dark:text-purple-400">My Portfolio</h4>
-    <h2 class="text-center text-5xl font-Ovo mb-4">🛠️ My Latest Work</h2>
-    <p class="text-center mb-12 max-w-2xl mx-auto text-gray-600 dark:text-gray-300 font-Ovo">
-      Explore my full-stack and AI-powered projects. Each project showcases different skills and technologies I've mastered.
-    </p>
-
-    <!-- Modern Responsive Project Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-      <!-- Project 1: Connectify -->
-      <div class="group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-gray-100 dark:border-gray-700 hover:border-purple-200 dark:hover:border-purple-800">
-        <div class="mb-6">
-          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
-            Connectify 💬
-          </h3>
-          <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-            Real-time chat application with user authentication and instant messaging features. Built with modern web technologies for seamless communication.
-          </p>
           </div>
-        
-        <div class="flex flex-wrap gap-2 mb-6">
-          <span class="px-3 py-1.5 bg-blue-100 text-blue-800 text-sm font-medium rounded-full dark:bg-blue-900/50 dark:text-blue-300 group-hover:bg-blue-200 dark:group-hover:bg-blue-800/70 transition-colors">React</span>
-          <span class="px-3 py-1.5 bg-green-100 text-green-800 text-sm font-medium rounded-full dark:bg-green-900/50 dark:text-green-300 group-hover:bg-green-200 dark:group-hover:bg-green-800/70 transition-colors">Node.js</span>
-          <span class="px-3 py-1.5 bg-yellow-100 text-yellow-800 text-sm font-medium rounded-full dark:bg-yellow-900/50 dark:text-yellow-300 group-hover:bg-yellow-200 dark:group-hover:bg-yellow-800/70 transition-colors">MongoDB</span>
-          <span class="px-3 py-1.5 bg-purple-100 text-purple-800 text-sm font-medium rounded-full dark:bg-purple-900/50 dark:text-purple-300 group-hover:bg-purple-200 dark:group-hover:bg-purple-800/70 transition-colors">Socket.io</span>
-        </div>
-        
-        <div class="flex gap-3">
-            <a href="https://github.com/Karthik0484/Own-Project" target="_blank" 
-             class="flex-1 text-center bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium shadow-lg hover:shadow-xl">
-            <span>💻 GitHub Repo</span>
-            </a>
-            <a href="#" target="_blank" 
-             class="flex-1 text-center bg-white dark:bg-gray-700 border-2 border-purple-600 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium">
-            <span>🔗 Live Demo</span>
-            </a>
-        </div>
-      </div>
-
-      <!-- Project 2: Notes App -->
-      <div class="group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-gray-100 dark:border-gray-700 hover:border-purple-200 dark:hover:border-purple-800">
-        <div class="mb-6">
-          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
-            Notes App 📝
-          </h3>
-          <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-            Create and manage notes in a fast, user‑friendly interface.
-            Rich‑text formatting for clearer, more expressive content.
-            Autosaves to local storage for reliable, offline persistence.
-          </p>
-          </div>
-        
-        <div class="flex flex-wrap gap-2 mb-6">
-          <span class="px-3 py-1.5 bg-blue-100 text-blue-800 text-sm font-medium rounded-full dark:bg-blue-900/50 dark:text-blue-300 group-hover:bg-blue-200 dark:group-hover:bg-blue-800/70 transition-colors">React</span>
-          <span class="px-3 py-1.5 bg-cyan-100 text-cyan-800 text-sm font-medium rounded-full dark:bg-cyan-900/50 dark:text-cyan-300 group-hover:bg-cyan-200 dark:group-hover:bg-cyan-800/70 transition-colors">Tailwind CSS</span>
-          <span class="px-3 py-1.5 bg-yellow-100 text-yellow-800 text-sm font-medium rounded-full dark:bg-yellow-900/50 dark:text-yellow-300 group-hover:bg-yellow-200 dark:group-hover:bg-yellow-800/70 transition-colors">LocalStorage</span>
-        </div>
-        
-        <div class="flex gap-3">
-            <a href="#" target="_blank" 
-             class="flex-1 text-center bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium shadow-lg hover:shadow-xl">
-            <span>💻 GitHub Repo</span>
-            </a>
-            <a href="https://karthik-notes.vercel.app/" target="_blank" 
-             class="flex-1 text-center bg-white dark:bg-gray-700 border-2 border-purple-600 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium">
-            <span>🔗 Live Demo</span>
-            </a>
-        </div>
-      </div>
-
-      <!-- Project 3: WeatherNow -->
-      <div class="group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-gray-100 dark:border-gray-700 hover:border-purple-200 dark:hover:border-purple-800">
-        <div class="mb-6">
-          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
-            WeatherNow ☁️
-          </h3>
-          <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-            Real‑time weather powered by OpenWeather in a clean, responsive UI.
-            Accurate, location‑based updates with timely details.
-            Fast, lightweight design for clear, at‑a‑glance forecasts.
-          </p>
-          </div>
-        
-        <div class="flex flex-wrap gap-2 mb-6">
-          <span class="px-3 py-1.5 bg-yellow-100 text-yellow-800 text-sm font-medium rounded-full dark:bg-yellow-900/50 dark:text-yellow-300 group-hover:bg-yellow-200 dark:group-hover:bg-yellow-800/70 transition-colors">JavaScript</span>
-          <span class="px-3 py-1.5 bg-green-100 text-green-800 text-sm font-medium rounded-full dark:bg-green-900/50 dark:text-green-300 group-hover:bg-green-200 dark:group-hover:bg-green-800/70 transition-colors">OpenWeather API</span>
-          <span class="px-3 py-1.5 bg-blue-100 text-blue-800 text-sm font-medium rounded-full dark:bg-blue-900/50 dark:text-blue-300 group-hover:bg-blue-200 dark:group-hover:bg-blue-800/70 transition-colors">CSS3</span>
-        </div>
-        
-        <div class="flex gap-3">
-            <a href="#" target="_blank" 
-             class="flex-1 text-center bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium shadow-lg hover:shadow-xl">
-            <span>💻 GitHub Repo</span>
-            </a>
-            <a href="https://karthik0484.github.io/Weather-appl/" target="_blank" 
-             class="flex-1 text-center bg-white dark:bg-gray-700 border-2 border-purple-600 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium">
-            <span>🔗 Live Demo</span>
-            </a>
-        </div>
-      </div>
-
-      <!-- Project 4: Course Recommender -->
-      <div class="group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-gray-100 dark:border-gray-700 hover:border-purple-200 dark:hover:border-purple-800">
-        <div class="mb-6">
-          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
-            Course Recommender 🤖
-          </h3>
-          <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-            AI-powered course recommendation system using k-NN algorithm and Flask backend. Provides personalized learning paths based on user preferences.
-          </p>
-          </div>
-        
-        <div class="flex flex-wrap gap-2 mb-6">
-          <span class="px-3 py-1.5 bg-yellow-100 text-yellow-800 text-sm font-medium rounded-full dark:bg-yellow-900/50 dark:text-yellow-300 group-hover:bg-yellow-200 dark:group-hover:bg-yellow-800/70 transition-colors">Python</span>
-          <span class="px-3 py-1.5 bg-green-100 text-green-800 text-sm font-medium rounded-full dark:bg-green-900/50 dark:text-green-300 group-hover:bg-green-200 dark:group-hover:bg-green-800/70 transition-colors">Flask</span>
-          <span class="px-3 py-1.5 bg-orange-100 text-orange-800 text-sm font-medium rounded-full dark:bg-orange-900/50 dark:text-orange-300 group-hover:bg-orange-200 dark:group-hover:bg-orange-800/70 transition-colors">Scikit-learn</span>
-          <span class="px-3 py-1.5 bg-gray-100 text-gray-800 text-sm font-medium rounded-full dark:bg-gray-700/50 dark:text-gray-300 group-hover:bg-gray-200 dark:group-hover:bg-gray-600/70 transition-colors">Pandas</span>
-        </div>
-        
-        <div class="flex gap-3">
-            <a href="https://github.com/Karthik0484/Education-Recommendations" target="_blank" 
-             class="flex-1 text-center bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium shadow-lg hover:shadow-xl">
-            <span>💻 GitHub Repo</span>
-            </a>
-            <a href="#" target="_blank" 
-             class="flex-1 text-center bg-white dark:bg-gray-700 border-2 border-purple-600 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium">
-            <span>🔗 Live Demo</span>
-            </a>
-        </div>
-      </div>
-
-      <!-- Project 5: Day Draft -->
-      <div class="group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-gray-100 dark:border-gray-700 hover:border-purple-200 dark:hover:border-purple-800">
-        <div class="mb-6">
-          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
-            Day Draft 📝✨
-          </h3>
-          <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-            A personal web app to plan your day and track progress. Features a clean, interactive, and responsive interface with real-time updates.
-          </p>
-          </div>
-        
-        <div class="flex flex-wrap gap-2 mb-6">
-          <span class="px-3 py-1.5 bg-orange-100 text-orange-800 text-sm font-medium rounded-full dark:bg-orange-900/50 dark:text-orange-300 group-hover:bg-orange-200 dark:group-hover:bg-orange-800/70 transition-colors">HTML5</span>
-          <span class="px-3 py-1.5 bg-purple-100 text-purple-800 text-sm font-medium rounded-full dark:bg-purple-900/50 dark:text-purple-300 group-hover:bg-purple-200 dark:group-hover:bg-purple-800/70 transition-colors">CSS3</span>
-          <span class="px-3 py-1.5 bg-yellow-100 text-yellow-800 text-sm font-medium rounded-full dark:bg-yellow-900/50 dark:text-yellow-300 group-hover:bg-yellow-200 dark:group-hover:bg-yellow-800/70 transition-colors">JavaScript</span>
-          <span class="px-3 py-1.5 bg-green-100 text-green-800 text-sm font-medium rounded-full dark:bg-green-900/50 dark:text-green-300 group-hover:bg-green-200 dark:group-hover:bg-green-800/70 transition-colors">Supabase</span>
-        </div>
-        
-        <div class="flex gap-3">
-            <a href="https://github.com/Karthik0484/Day-Draft" target="_blank" 
-             class="flex-1 text-center bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium shadow-lg hover:shadow-xl">
-            <span>💻 GitHub Repo</span>
-            </a>
-            <a href="https://karthik-day-draft.vercel.app/" target="_blank" 
-             class="flex-1 text-center bg-white dark:bg-gray-700 border-2 border-purple-600 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium">
-            <span>🔗 Live Demo</span>
-            </a>
-        </div>
-      </div>
-
-      <!-- Project 6: Food Delivery Website -->
-      <div class="group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-gray-100 dark:border-gray-700 hover:border-purple-200 dark:hover:border-purple-800">
-        <div class="mb-6">
-          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
-            Food Delivery Website 🍔
-          </h3>
-          <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-            A frontend-focused food delivery web app with responsive design. Users can browse menus, select items, and explore restaurants with modern UI.
-          </p>
-          </div>
-        
-        <div class="flex flex-wrap gap-2 mb-6">
-          <span class="px-3 py-1.5 bg-blue-100 text-blue-800 text-sm font-medium rounded-full dark:bg-blue-900/50 dark:text-blue-300 group-hover:bg-blue-200 dark:group-hover:bg-blue-800/70 transition-colors">React</span>
-          <span class="px-3 py-1.5 bg-blue-100 text-blue-800 text-sm font-medium rounded-full dark:bg-blue-900/50 dark:text-blue-300 group-hover:bg-blue-200 dark:group-hover:bg-blue-800/70 transition-colors">TypeScript</span>
-          <span class="px-3 py-1.5 bg-cyan-100 text-cyan-800 text-sm font-medium rounded-full dark:bg-cyan-900/50 dark:text-cyan-300 group-hover:bg-cyan-200 dark:group-hover:bg-cyan-800/70 transition-colors">shadcn-ui</span>
-          <span class="px-3 py-1.5 bg-cyan-100 text-cyan-800 text-sm font-medium rounded-full dark:bg-cyan-900/50 dark:text-cyan-300 group-hover:bg-cyan-200 dark:group-hover:bg-cyan-800/70 transition-colors">Tailwind CSS</span>
-        </div>
-        
-        <div class="flex gap-3">
-            <a href="https://github.com/Karthik0484/Food-app/tree/main" target="_blank" 
-             class="flex-1 text-center bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium shadow-lg hover:shadow-xl">
-            <span>💻 GitHub Repo</span>
-            </a>
-            <a href="https://food-app-gilt-mu.vercel.app/" target="_blank" 
-             class="flex-1 text-center bg-white dark:bg-gray-700 border-2 border-purple-600 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium">
-            <span>🔗 Live Demo</span>
-            </a>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Experience & Achievements Section -->
-<section id="experience" class="w-full px-[12%] py-16 scroll-mt-20">
-  <div class="max-w-7xl mx-auto">
-    <div class="text-center mb-10">
-      <h2 class="text-4xl md:text-5xl font-Ovo mb-3">💼 Experience & Achievements</h2>
-      <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto font-Ovo">A glimpse of my professional journey and certifications in Web & AI/ML.</p>
-    </div>
+  <!--- ---------Projects------------>
+  <div id="projects"
+    class="w-full px-[12%] pt-36 pb-16 scroll-mt-20 dark:bg-gradient-to-b dark:from-darkTheme dark:to-[#1a0a2e]">
+    <div class="max-w-7xl mx-auto">
+      <h4 class="text-center mb-2 text-lg font-Ovo text-purple-600 dark:text-purple-400">My Portfolio</h4>
+      <h2 class="text-center text-5xl font-Ovo mb-4">🛠️ My Latest Work</h2>
+      <p class="text-center mb-12 max-w-2xl mx-auto text-gray-600 dark:text-gray-300 font-Ovo">
+        Explore my full-stack and AI-powered projects. Each project showcases different skills and technologies I've
+        mastered.
+      </p>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <!-- Work Experience List -->
-      <div>
-        <h3 class="text-2xl font-semibold mb-4 flex items-center gap-2"><span>💼</span> Work Experience</h3>
-        <div id="experienceList" class="space-y-4"></div>
-      </div>
+      <!-- Modern Responsive Project Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+        <!-- Project 1: Connectify -->
+        <div
+          class="project-card group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-gray-100 dark:border-gray-700 hover:border-purple-200 dark:hover:border-purple-800">
+          <div class="mb-6">
+            <h3
+              class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+              Connectify 💬
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+              Real-time chat application with user authentication and instant messaging features. Built with modern
+              web
+              technologies for seamless communication.
+            </p>
+          </div>
 
-      <!-- Certifications List -->
-      <div>
-        <h3 class="text-2xl font-semibold mb-4 flex items-center gap-2"><span>📜</span> Certifications & Achievements</h3>
-        <div id="certList" class="space-y-4"></div>
-      </div>
-    </div>
-    
-    <!-- Unified View More Button -->
-    <div class="mt-8 flex justify-center">
-      <button id="toggleAllBtn" class="px-5 py-2 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:from-purple-700 hover:to-indigo-700 transition-colors w-full sm:w-auto">View More</button>
-    </div>
-  </div>
-</section>
+          <div class="flex flex-wrap gap-2 mb-6">
+            <span
+              class="px-3 py-1.5 bg-blue-100 text-blue-800 text-sm font-medium rounded-full dark:bg-blue-900/50 dark:text-blue-300 group-hover:bg-blue-200 dark:group-hover:bg-blue-800/70 transition-colors">React</span>
+            <span
+              class="px-3 py-1.5 bg-green-100 text-green-800 text-sm font-medium rounded-full dark:bg-green-900/50 dark:text-green-300 group-hover:bg-green-200 dark:group-hover:bg-green-800/70 transition-colors">Node.js</span>
+            <span
+              class="px-3 py-1.5 bg-yellow-100 text-yellow-800 text-sm font-medium rounded-full dark:bg-yellow-900/50 dark:text-yellow-300 group-hover:bg-yellow-200 dark:group-hover:bg-yellow-800/70 transition-colors">MongoDB</span>
+            <span
+              class="px-3 py-1.5 bg-purple-100 text-purple-800 text-sm font-medium rounded-full dark:bg-purple-900/50 dark:text-purple-300 group-hover:bg-purple-200 dark:group-hover:bg-purple-800/70 transition-colors">Socket.io</span>
+          </div>
 
-    <!-- Contact Section -->
-    <section id="contact" class="bg-white dark:bg-darkTheme py-12">
-      <div class="max-w-4xl mx-auto px-4">
-        <!-- Heading Section -->
-        <div class="text-center mb-12">
-          <h4 class="text-lg font-Ovo text-gray-600 dark:text-gray-300 mb-2">Connect with me</h4>
-          <h2 class="text-4xl md:text-5xl font-Ovo font-bold mb-4 text-gray-900 dark:text-white">Get in touch.</h2>
-          <p class="text-base text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto">
-            👋 Hello! I'd love to hear from you! If you have any questions, comments or feedback, please use the form below 😊.
-          </p>
+          <div class="flex gap-3 mt-auto">
+            <a href="https://github.com/Karthik0484/Own-Project" target="_blank"
+              class="flex-1 text-center bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium shadow-lg hover:shadow-xl">
+              <span>💻 GitHub Repo</span>
+            </a>
+            <a href="#" target="_blank"
+              class="flex-1 text-center bg-white dark:bg-gray-700 border-2 border-purple-600 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium">
+              <span>🔗 Live Demo</span>
+            </a>
+          </div>
         </div>
-        
-        <!-- Contact Form -->
-        <div class="mx-auto md:w-1/2">
-          <form action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
-            <input type="hidden" name="access_key" value="1132fe6e-3e0d-4728-a22e-851ae6d8fec2">
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <input type="text" name="name" placeholder="Enter your name" required class="w-full p-3 outline-none border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800/50 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-purple-500 transition-shadow">
-              <input type="email" name="email" placeholder="Enter your email" required class="w-full p-3 outline-none border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800/50 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-purple-500 transition-shadow">
-            </div>
-            
-            <textarea name="message" rows="6" placeholder="Enter your message" required class="w-full p-4 outline-none border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800/50 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-purple-500 transition-shadow"></textarea>
-            
-            <div class="text-center">
-              <button type="submit" class="py-3 px-10 w-max flex items-center gap-2 bg-black/90 text-white rounded-full hover:bg-black dark:bg-white dark:text-black dark:hover:bg-gray-200 transition-colors duration-300 font-medium mx-auto">
-                Submit now <span>➡️</span>
-              </button>
-            </div>
-          </form>
-          
-          <!-- Logo and Email Section -->
-          <div class="text-center mt-8">
-            <img src="./images/logo.png.png" alt="Logo" class="w-28 h-auto mx-auto mb-4">
-            <a href="mailto:karthikofficial0484@gmail.com" class="inline-flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
-              <i class="fas fa-envelope"></i>
-              karthikofficial0484@gmail.com
+
+        <!-- Project 2: Notes App -->
+        <div
+          class="project-card group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-gray-100 dark:border-gray-700 hover:border-purple-200 dark:hover:border-purple-800">
+          <div class="mb-6">
+            <h3
+              class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+              Notes App 📝
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+              Create and manage notes in a fast, user‑friendly interface.
+              Rich‑text formatting for clearer, more expressive content.
+              Autosaves to local storage for reliable, offline persistence.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-2 mb-6">
+            <span
+              class="px-3 py-1.5 bg-blue-100 text-blue-800 text-sm font-medium rounded-full dark:bg-blue-900/50 dark:text-blue-300 group-hover:bg-blue-200 dark:group-hover:bg-blue-800/70 transition-colors">React</span>
+            <span
+              class="px-3 py-1.5 bg-cyan-100 text-cyan-800 text-sm font-medium rounded-full dark:bg-cyan-900/50 dark:text-cyan-300 group-hover:bg-cyan-200 dark:group-hover:bg-cyan-800/70 transition-colors">Tailwind
+              CSS</span>
+            <span
+              class="px-3 py-1.5 bg-yellow-100 text-yellow-800 text-sm font-medium rounded-full dark:bg-yellow-900/50 dark:text-yellow-300 group-hover:bg-yellow-200 dark:group-hover:bg-yellow-800/70 transition-colors">LocalStorage</span>
+          </div>
+
+          <div class="flex gap-3 mt-auto">
+            <a href="#" target="_blank"
+              class="flex-1 text-center bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium shadow-lg hover:shadow-xl">
+              <span>💻 GitHub Repo</span>
+            </a>
+            <a href="https://karthik-notes.vercel.app/" target="_blank"
+              class="flex-1 text-center bg-white dark:bg-gray-700 border-2 border-purple-600 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium">
+              <span>🔗 Live Demo</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 3: WeatherNow -->
+        <div
+          class="project-card group flex flex-col h-full bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-gray-100 dark:border-gray-700 hover:border-purple-200 dark:hover:border-purple-800">
+          <div class="mb-6">
+            <h3
+              class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+              WeatherNow ☁️
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+              Real‑time weather powered by OpenWeather in a clean, responsive UI.
+              Accurate, location‑based updates with timely details.
+              Fast, lightweight design for clear, at‑a‑glance forecasts.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-2 mb-6">
+            <span
+              class="px-3 py-1.5 bg-yellow-100 text-yellow-800 text-sm font-medium rounded-full dark:bg-yellow-900/50 dark:text-yellow-300 group-hover:bg-yellow-200 dark:group-hover:bg-yellow-800/70 transition-colors">JavaScript</span>
+            <span
+              class="px-3 py-1.5 bg-green-100 text-green-800 text-sm font-medium rounded-full dark:bg-green-900/50 dark:text-green-300 group-hover:bg-green-200 dark:group-hover:bg-green-800/70 transition-colors">OpenWeather
+              API</span>
+            <span
+              class="px-3 py-1.5 bg-blue-100 text-blue-800 text-sm font-medium rounded-full dark:bg-blue-900/50 dark:text-blue-300 group-hover:bg-blue-200 dark:group-hover:bg-blue-800/70 transition-colors">CSS3</span>
+          </div>
+
+          <div class="flex gap-3 mt-auto">
+            <a href="#" target="_blank"
+              class="flex-1 text-center bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium shadow-lg hover:shadow-xl">
+              <span>💻 GitHub Repo</span>
+            </a>
+            <a href="https://karthik0484.github.io/Weather-appl/" target="_blank"
+              class="flex-1 text-center bg-white dark:bg-gray-700 border-2 border-purple-600 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium">
+              <span>🔗 Live Demo</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 4: ATS Resume Matcher -->
+        <div
+          class="project-card group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-gray-100 dark:border-gray-700 hover:border-purple-200 dark:hover:border-purple-800">
+          <div class="mb-6">
+            <h3
+              class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+              ATS Resume Matcher 📄
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+              AI-powered system that compares resumes with job descriptions using NLP. Calculates match scores,
+              identifies matched/missing skills, and works for any job role. Supports PDF & TXT.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-2 mb-6">
+            <span
+              class="px-3 py-1.5 bg-yellow-100 text-yellow-800 text-sm font-medium rounded-full dark:bg-yellow-900/50 dark:text-yellow-300 group-hover:bg-yellow-200 dark:group-hover:bg-yellow-800/70 transition-colors">Python</span>
+            <span
+              class="px-3 py-1.5 bg-blue-100 text-blue-800 text-sm font-medium rounded-full dark:bg-blue-900/50 dark:text-blue-300 group-hover:bg-blue-200 dark:group-hover:bg-blue-800/70 transition-colors">NLP</span>
+            <span
+              class="px-3 py-1.5 bg-purple-100 text-purple-800 text-sm font-medium rounded-full dark:bg-purple-900/50 dark:text-purple-300 group-hover:bg-purple-200 dark:group-hover:bg-purple-800/70 transition-colors">Machine
+              Learning</span>
+          </div>
+
+          <div class="flex gap-3 mt-auto">
+            <a href="https://github.com/Karthik0484/Resume_matcher" target="_blank"
+              class="flex-1 text-center bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium shadow-lg hover:shadow-xl">
+              <span>💻 GitHub Repo</span>
+            </a>
+            <a href="https://resumemat.streamlit.app/" target="_blank"
+              class="flex-1 text-center bg-white dark:bg-gray-700 border-2 border-purple-600 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium">
+              <span>🔗 Live Demo</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 5: Spam Message Classifier -->
+        <div
+          class="project-card group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-gray-100 dark:border-gray-700 hover:border-purple-200 dark:hover:border-purple-800">
+          <div class="mb-6">
+            <h3
+              class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+              Spam Message Classifier 📩
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+              Machine learning model that automatically classifies messages as Spam or Not Spam (Ham). Simulates
+              real-world SMS/email spam detection.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-2 mb-6">
+            <span
+              class="px-3 py-1.5 bg-yellow-100 text-yellow-800 text-sm font-medium rounded-full dark:bg-yellow-900/50 dark:text-yellow-300 group-hover:bg-yellow-200 dark:group-hover:bg-yellow-800/70 transition-colors">Python</span>
+            <span
+              class="px-3 py-1.5 bg-purple-100 text-purple-800 text-sm font-medium rounded-full dark:bg-purple-900/50 dark:text-purple-300 group-hover:bg-purple-200 dark:group-hover:bg-purple-800/70 transition-colors">Machine
+              Learning</span>
+            <div class="w-full"></div>
+            <span
+              class="px-3 py-1.5 bg-blue-100 text-blue-800 text-sm font-medium rounded-full dark:bg-blue-900/50 dark:text-blue-300 group-hover:bg-blue-200 dark:group-hover:bg-blue-800/70 transition-colors">Scikit-learn</span>
+          </div>
+
+          <div class="flex gap-3 mt-auto">
+            <a href="https://github.com/Karthik0484/Spam_message_Classifier" target="_blank"
+              class="flex-1 text-center bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium shadow-lg hover:shadow-xl">
+              <span>💻 GitHub Repo</span>
+            </a>
+            <a href="https://emailspamchecke.streamlit.app/" target="_blank"
+              class="flex-1 text-center bg-white dark:bg-gray-700 border-2 border-purple-600 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium">
+              <span>🔗 Live Demo</span>
+            </a>
+          </div>
+        </div>
+
+
+
+        <!-- Project 5: Day Draft -->
+        <div
+          class="project-card group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-gray-100 dark:border-gray-700 hover:border-purple-200 dark:hover:border-purple-800">
+          <div class="mb-6">
+            <h3
+              class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+              Day Draft 📝✨
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+              A personal web app to plan your day and track progress. Features a clean, interactive, and responsive
+              interface with real-time updates.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-2 mb-6">
+            <span
+              class="px-3 py-1.5 bg-orange-100 text-orange-800 text-sm font-medium rounded-full dark:bg-orange-900/50 dark:text-orange-300 group-hover:bg-orange-200 dark:group-hover:bg-orange-800/70 transition-colors">HTML5</span>
+            <span
+              class="px-3 py-1.5 bg-purple-100 text-purple-800 text-sm font-medium rounded-full dark:bg-purple-900/50 dark:text-purple-300 group-hover:bg-purple-200 dark:group-hover:bg-purple-800/70 transition-colors">CSS3</span>
+            <span
+              class="px-3 py-1.5 bg-yellow-100 text-yellow-800 text-sm font-medium rounded-full dark:bg-yellow-900/50 dark:text-yellow-300 group-hover:bg-yellow-200 dark:group-hover:bg-yellow-800/70 transition-colors">JavaScript</span>
+            <span
+              class="px-3 py-1.5 bg-green-100 text-green-800 text-sm font-medium rounded-full dark:bg-green-900/50 dark:text-green-300 group-hover:bg-green-200 dark:group-hover:bg-green-800/70 transition-colors">Supabase</span>
+          </div>
+
+          <div class="flex gap-3 mt-auto">
+            <a href="https://github.com/Karthik0484/Day-Draft" target="_blank"
+              class="flex-1 text-center bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium shadow-lg hover:shadow-xl">
+              <span>💻 GitHub Repo</span>
+            </a>
+            <a href="https://karthik-day-draft.vercel.app/" target="_blank"
+              class="flex-1 text-center bg-white dark:bg-gray-700 border-2 border-purple-600 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium">
+              <span>🔗 Live Demo</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 7: Course Recommender -->
+        <div
+          class="project-card hidden group flex flex-col h-full bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-gray-100 dark:border-gray-700 hover:border-purple-200 dark:hover:border-purple-800">
+          <div class="mb-6">
+            <h3
+              class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+              Course Recommender 🤖
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+              AI-powered course recommendation system using k-NN algorithm and Flask backend. Provides personalized
+              learning paths based on user preferences.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-2 mb-6">
+            <span
+              class="px-3 py-1.5 bg-yellow-100 text-yellow-800 text-sm font-medium rounded-full dark:bg-yellow-900/50 dark:text-yellow-300 group-hover:bg-yellow-200 dark:group-hover:bg-yellow-800/70 transition-colors">Python</span>
+            <span
+              class="px-3 py-1.5 bg-green-100 text-green-800 text-sm font-medium rounded-full dark:bg-green-900/50 dark:text-green-300 group-hover:bg-green-200 dark:group-hover:bg-green-800/70 transition-colors">Flask</span>
+            <span
+              class="px-3 py-1.5 bg-orange-100 text-orange-800 text-sm font-medium rounded-full dark:bg-orange-900/50 dark:text-orange-300 group-hover:bg-orange-200 dark:group-hover:bg-orange-800/70 transition-colors">Scikit-learn</span>
+            <span
+              class="px-3 py-1.5 bg-gray-100 text-gray-800 text-sm font-medium rounded-full dark:bg-gray-700/50 dark:text-gray-300 group-hover:bg-gray-200 dark:group-hover:bg-gray-600/70 transition-colors">Pandas</span>
+          </div>
+
+          <div class="flex gap-3 mt-auto">
+            <a href="https://github.com/Karthik0484/Education-Recommendations" target="_blank"
+              class="flex-1 text-center bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium shadow-lg hover:shadow-xl">
+              <span>💻 GitHub Repo</span>
+            </a>
+            <a href="https://github.com/Karthik0484/Education-Recommendations" target="_blank"
+              class="flex-1 text-center bg-white dark:bg-gray-700 border-2 border-purple-600 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium">
+              <span>🔗 Live Demo</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 7: Food Delivery Website -->
+        <div
+          class="project-card hidden group flex flex-col h-full bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-gray-100 dark:border-gray-700 hover:border-purple-200 dark:hover:border-purple-800">
+          <div class="mb-6">
+            <h3
+              class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+              Food Delivery Website 🍔
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+              A frontend-focused food delivery web app with responsive design. Users can browse menus, select items,
+              and
+              explore restaurants with modern UI.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-2 mb-6">
+            <span
+              class="px-3 py-1.5 bg-blue-100 text-blue-800 text-sm font-medium rounded-full dark:bg-blue-900/50 dark:text-blue-300 group-hover:bg-blue-200 dark:group-hover:bg-blue-800/70 transition-colors">React</span>
+            <span
+              class="px-3 py-1.5 bg-blue-100 text-blue-800 text-sm font-medium rounded-full dark:bg-blue-900/50 dark:text-blue-300 group-hover:bg-blue-200 dark:group-hover:bg-blue-800/70 transition-colors">TypeScript</span>
+            <span
+              class="px-3 py-1.5 bg-cyan-100 text-cyan-800 text-sm font-medium rounded-full dark:bg-cyan-900/50 dark:text-cyan-300 group-hover:bg-cyan-200 dark:group-hover:bg-cyan-800/70 transition-colors">shadcn-ui</span>
+            <span
+              class="px-3 py-1.5 bg-cyan-100 text-cyan-800 text-sm font-medium rounded-full dark:bg-cyan-900/50 dark:text-cyan-300 group-hover:bg-cyan-200 dark:group-hover:bg-cyan-800/70 transition-colors">Tailwind
+              CSS</span>
+          </div>
+
+          <div class="flex gap-3 mt-auto">
+            <a href="https://github.com/Karthik0484/Food-app/tree/main" target="_blank"
+              class="flex-1 text-center bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium shadow-lg hover:shadow-xl">
+              <span>💻 GitHub Repo</span>
+            </a>
+            <a href="https://food-app-gilt-mu.vercel.app/" target="_blank"
+              class="flex-1 text-center bg-white dark:bg-gray-700 border-2 border-purple-600 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium">
+              <span>🔗 Live Demo</span>
+            </a>
+          </div>
+        </div>
+
+
+
+        <!-- Project 8: Attendance System Web App -->
+        <div
+          class="project-card hidden group flex flex-col h-full bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-gray-100 dark:border-gray-700 hover:border-purple-200 dark:hover:border-purple-800">
+          <div class="mb-6">
+            <h3
+              class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+              Attendance System 📅
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+              A secure attendance management web app with user login, real-time attendance marking, and responsive UI
+              built
+              with Next.js and Tailwind CSS.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-2 mb-6">
+            <span
+              class="px-3 py-1.5 bg-gray-100 text-gray-800 text-sm font-medium rounded-full dark:bg-gray-700/50 dark:text-gray-300 group-hover:bg-gray-200 dark:group-hover:bg-gray-600/70 transition-colors">Next.js</span>
+            <span
+              class="px-3 py-1.5 bg-cyan-100 text-cyan-800 text-sm font-medium rounded-full dark:bg-cyan-900/50 dark:text-cyan-300 group-hover:bg-cyan-200 dark:group-hover:bg-cyan-800/70 transition-colors">Tailwind
+              CSS</span>
+            <span
+              class="px-3 py-1.5 bg-green-100 text-green-800 text-sm font-medium rounded-full dark:bg-green-900/50 dark:text-green-300 group-hover:bg-green-200 dark:group-hover:bg-green-800/70 transition-colors">Node.js</span>
+            <span
+              class="px-3 py-1.5 bg-green-100 text-green-800 text-sm font-medium rounded-full dark:bg-green-900/50 dark:text-green-300 group-hover:bg-green-200 dark:group-hover:bg-green-800/70 transition-colors">MongoDB</span>
+          </div>
+
+          <div class="flex gap-3 mt-auto">
+            <a href="https://github.com/Karthik0484/Attendance_project" target="_blank"
+              class="flex-1 text-center bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium shadow-lg hover:shadow-xl">
+              <span>💻 GitHub Repo</span>
+            </a>
+            <a href="https://attendance-project-tau.vercel.app/login" target="_blank"
+              class="flex-1 text-center bg-white dark:bg-gray-700 border-2 border-purple-600 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 font-medium">
+              <span>🔗 Live Demo</span>
             </a>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- Footer Section -->
-    <footer class="bg-purple-900 border-t border-gray-700 py-6">
-      <div class="max-w-4xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
-        <!-- Copyright Text -->
-        <div class="text-center md:text-left mb-4 md:mb-0">
-          <p class="text-purple-200">© 2025 Karthik. All rights reserved.</p>
-        </div>
-        
-        <!-- Social Icons -->
-        <div class="flex space-x-4">
-          <a href="https://www.linkedin.com/in/karthik-k-573459278" target="_blank" aria-label="LinkedIn" class="text-purple-300 hover:text-white transition-colors">
-            <i class="fab fa-linkedin-in text-xl"></i>
-          </a>
-          <a href="https://github.com/Karthik0484" target="_blank" aria-label="GitHub" class="text-purple-300 hover:text-white transition-colors">
-            <i class="fab fa-github text-xl"></i>
-          </a>
-          <a href="mailto:karthikofficial0484@gmail.com" aria-label="Email" class="text-purple-300 hover:text-white transition-colors">
-            <i class="far fa-envelope text-xl"></i>
-          </a>
-        </div>
-      </div>
-    </footer>
-
-    <!-- Certificate PDF Preview Modal -->
-    <div id="pdfModal" class="fixed inset-0 z-[60] hidden">
-      <!-- Backdrop -->
-      <div class="absolute inset-0 bg-black/60" onclick="closePdfPreview()"></div>
-      <!-- Modal content -->
-      <div class="relative mx-auto mt-10 h-[80vh] w-11/12 md:w-5/6 lg:w-3/4 bg-white dark:bg-gray-900 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-        <div class="flex items-center justify-between px-4 py-3 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
-          <h3 class="font-semibold text-gray-800 dark:text-gray-100">Certificate Preview</h3>
-          <button class="px-3 py-1.5 rounded-md bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-100" onclick="closePdfPreview()">Close</button>
-        </div>
-        <iframe id="pdfFrame" src="" class="w-full h-full" title="Certificate PDF Preview"></iframe>
+      <!-- View More / View Less Button -->
+      <div class="mt-12 flex justify-center">
+        <button id="viewMoreProjectsBtn"
+          class="px-8 py-3 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 transform ease-in-out">
+          View More
+        </button>
       </div>
     </div>
+  </div>
 
-    
-<script src="./script.js"></script>
+  <!-- Experience & Achievements Section -->
+  <section id="experience" class="w-full px-[12%] pt-36 pb-16 scroll-mt-20">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-10">
+        <h2 class="text-4xl md:text-5xl font-Ovo mb-3">💼 Experience & Achievements</h2>
+        <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto font-Ovo">A glimpse of my professional journey
+          and
+          certifications in Web & AI/ML.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Work Experience List -->
+        <div>
+          <h3 class="text-2xl font-semibold mb-4 flex items-center gap-2"><span>💼</span> Work Experience</h3>
+          <div id="experienceList" class="space-y-4"></div>
+        </div>
+
+        <!-- Certifications List -->
+        <div>
+          <h3 class="text-2xl font-semibold mb-4 flex items-center gap-2"><span>📜</span> Certifications &
+            Achievements
+          </h3>
+          <div id="certList" class="space-y-4"></div>
+        </div>
+      </div>
+
+      <!-- Unified View More Button -->
+      <div class="mt-8 flex justify-center">
+        <button id="toggleAllBtn"
+          class="px-5 py-2 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:from-purple-700 hover:to-indigo-700 transition-colors w-full sm:w-auto">View
+          More</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="bg-white dark:bg-darkTheme pt-36 pb-12">
+    <div class="max-w-4xl mx-auto px-4">
+      <!-- Heading Section -->
+      <div class="text-center mb-12">
+        <h4 class="text-lg font-Ovo text-gray-600 dark:text-gray-300 mb-2">Connect with me</h4>
+        <h2 class="text-4xl md:text-5xl font-Ovo font-bold mb-4 text-gray-900 dark:text-white">Get in touch.</h2>
+        <p class="text-base text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto">
+          👋 Hello! I'd love to hear from you! If you have any questions, comments or feedback, please use the form
+          below 😊.
+        </p>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="mx-auto md:w-1/2">
+        <form action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
+          <input type="hidden" name="access_key" value="1132fe6e-3e0d-4728-a22e-851ae6d8fec2">
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input type="text" name="name" placeholder="Enter your name" required
+              class="w-full p-3 outline-none border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800/50 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-purple-500 transition-shadow">
+            <input type="email" name="email" placeholder="Enter your email" required
+              class="w-full p-3 outline-none border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800/50 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-purple-500 transition-shadow">
+          </div>
+
+          <textarea name="message" rows="6" placeholder="Enter your message" required
+            class="w-full p-4 outline-none border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800/50 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-purple-500 transition-shadow"></textarea>
+
+          <div class="text-center">
+            <button type="submit"
+              class="py-3 px-10 w-max flex items-center gap-2 bg-black/90 text-white rounded-full hover:bg-black dark:bg-white dark:text-black dark:hover:bg-gray-200 transition-colors duration-300 font-medium mx-auto">
+              Submit now <span>➡️</span>
+            </button>
+          </div>
+        </form>
+
+        <!-- Logo and Email Section -->
+        <div class="text-center mt-8">
+          <img src="./images/logo.png.png" alt="Logo" class="w-28 h-auto mx-auto mb-4">
+          <a href="mailto:karthikofficial0484@gmail.com"
+            class="inline-flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+            <i class="fas fa-envelope"></i>
+            karthikofficial0484@gmail.com
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer class="bg-purple-900 border-t border-gray-700 py-6">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
+      <!-- Copyright Text -->
+      <div class="text-center md:text-left mb-4 md:mb-0">
+        <p class="text-purple-200">© 2025 Karthik. All rights reserved.</p>
+      </div>
+
+      <!-- Social Icons -->
+      <div class="flex space-x-4">
+        <a href="https://www.linkedin.com/in/karthik-k-573459278" target="_blank" aria-label="LinkedIn"
+          class="text-purple-300 hover:text-white transition-colors">
+          <i class="fab fa-linkedin-in text-xl"></i>
+        </a>
+        <a href="https://github.com/Karthik0484" target="_blank" aria-label="GitHub"
+          class="text-purple-300 hover:text-white transition-colors">
+          <i class="fab fa-github text-xl"></i>
+        </a>
+        <a href="mailto:karthikofficial0484@gmail.com" aria-label="Email"
+          class="text-purple-300 hover:text-white transition-colors">
+          <i class="far fa-envelope text-xl"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Certificate PDF Preview Modal -->
+  <div id="pdfModal" class="fixed inset-0 z-[60] hidden">
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-black/60" onclick="closePdfPreview()"></div>
+    <!-- Modal content -->
+    <div
+      class="relative mx-auto mt-10 h-[80vh] w-11/12 md:w-5/6 lg:w-3/4 bg-white dark:bg-gray-900 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div
+        class="flex items-center justify-between px-4 py-3 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+        <h3 class="font-semibold text-gray-800 dark:text-gray-100">Certificate Preview</h3>
+        <button
+          class="px-3 py-1.5 rounded-md bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-100"
+          onclick="closePdfPreview()">Close</button>
+      </div>
+      <iframe id="pdfFrame" src="" class="w-full h-full" title="Certificate PDF Preview"></iframe>
+    </div>
+  </div>
+
+
+  <script src="./script.js"></script>
 </body>
+
 </html>
