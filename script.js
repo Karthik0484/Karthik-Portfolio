@@ -81,6 +81,7 @@ function setSectionVisibility(targetId) {
 
   if (normalized === 'home') {
     // HOME MODE: Show ALL sections
+    document.body.classList.add('home-active');
     sectionIds.forEach(id => {
       const el = document.getElementById(id);
       if (el) el.classList.remove('hidden');
@@ -89,6 +90,7 @@ function setSectionVisibility(targetId) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } else {
     // FOCUS MODE: Show ONLY the target section
+    document.body.classList.remove('home-active');
     sectionIds.forEach(id => {
       const el = document.getElementById(id);
       if (el) {
@@ -102,6 +104,30 @@ function setSectionVisibility(targetId) {
     // Scroll to top immediately to show the focused section correctly
     window.scrollTo({ top: 0, behavior: 'auto' });
   }
+
+  // Update nav links to show which one is focused
+  updateActiveNavLink(normalized);
+}
+
+function updateActiveNavLink(activeId) {
+  // Normalize IDs: both 'home' and 'top' refer to the Home link
+  const desktopNavLinks = document.querySelectorAll('nav ul a');
+  const mobileNavLinks = document.querySelectorAll('#mobileMenu a');
+
+  const allLinks = [...desktopNavLinks, ...mobileNavLinks];
+
+  allLinks.forEach(link => {
+    const href = link.getAttribute('href').replace('#', '');
+    const isHome = (href === 'home' || href === 'top');
+    const isActiveHome = (activeId === 'home' || activeId === 'top') && isHome;
+    const isActiveSection = (href === activeId);
+
+    if (isActiveHome || isActiveSection) {
+      link.classList.add('nav-link-active');
+    } else {
+      link.classList.remove('nav-link-active');
+    }
+  });
 }
 
 // Intercept nav link clicks (desktop and mobile)
