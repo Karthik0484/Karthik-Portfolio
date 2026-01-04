@@ -1,123 +1,142 @@
+// Force scroll to top on reload
+if (history.scrollRestoration) {
+  history.scrollRestoration = 'manual';
+} else {
+  window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+  }
+}
+window.onload = function () {
+  window.scrollTo(0, 0);
+};
+
 const mobileMenu = document.querySelector('#mobileMenu');
 const navBar = document.querySelector("nav");
 const navLinks = document.querySelector("nav ul");
 
-function openMenu(){
-    if (mobileMenu.classList.contains('show')) {
-        closeMenu();
-    } else {
-        mobileMenu.classList.remove('hidden');
-        // Trigger animation after removing hidden class
-        setTimeout(() => {
-            mobileMenu.classList.add('show');
-        }, 10);
-    }
-}
-
-function closeMenu(){
-    mobileMenu.classList.remove('show');
-    // Hide the menu after animation completes
+function openMenu() {
+  if (mobileMenu.classList.contains('show')) {
+    closeMenu();
+  } else {
+    mobileMenu.classList.remove('hidden');
+    // Trigger animation after removing hidden class
     setTimeout(() => {
-        mobileMenu.classList.add('hidden');
-    }, 300);
+      mobileMenu.classList.add('show');
+    }, 10);
+  }
 }
 
-window.addEventListener('scroll', () =>{
-    if(scrollY > 50){
-        navBar.classList.add('bg-white','bg-opacity-50','backdrop-blur-lg','shadow-sm','dark:bg-darkTheme','dark:shadow-white/20');
-        navLinks.classList.remove('bg-white','shadow-sm','bg-opacity-50','dark:border','dark:border-white/50','dark:bg-transparent');
-    }else{
-        navBar.classList.remove('bg-white','bg-opacity-50','backdrop-blur-lg','shadow-sm','dark:bg-darkTheme','dark:shadow-white/20');
-        navLinks.classList.add('bg-white','shadow-sm','bg-opacity-50','dark:border','dark:border-white/50','dark:bg-transparent');
-    }
+function closeMenu() {
+  mobileMenu.classList.remove('show');
+  // Hide the menu after animation completes
+  setTimeout(() => {
+    mobileMenu.classList.add('hidden');
+  }, 300);
+}
+
+window.addEventListener('scroll', () => {
+  if (scrollY > 50) {
+    navBar.classList.add('bg-white', 'bg-opacity-50', 'backdrop-blur-lg', 'shadow-sm', 'dark:bg-darkTheme', 'dark:shadow-white/20');
+    navLinks.classList.remove('bg-white', 'shadow-sm', 'bg-opacity-50', 'dark:border', 'dark:border-white/50', 'dark:bg-transparent');
+  } else {
+    navBar.classList.remove('bg-white', 'bg-opacity-50', 'backdrop-blur-lg', 'shadow-sm', 'dark:bg-darkTheme', 'dark:shadow-white/20');
+    navLinks.classList.add('bg-white', 'shadow-sm', 'bg-opacity-50', 'dark:border', 'dark:border-white/50', 'dark:bg-transparent');
+  }
 })
 
 // Close mobile menu when clicking outside
 document.addEventListener('click', (event) => {
-    const menuButton = document.querySelector('[onclick="openMenu()"]');
-    const isClickInsideMenu = mobileMenu.contains(event.target);
-    const isClickOnMenuButton = menuButton && menuButton.contains(event.target);
-    
-    if (!isClickInsideMenu && !isClickOnMenuButton && mobileMenu.classList.contains('show')) {
-        closeMenu();
-    }
+  const menuButton = document.querySelector('[onclick="openMenu()"]');
+  const isClickInsideMenu = mobileMenu.contains(event.target);
+  const isClickOnMenuButton = menuButton && menuButton.contains(event.target);
+
+  if (!isClickInsideMenu && !isClickOnMenuButton && mobileMenu.classList.contains('show')) {
+    closeMenu();
+  }
 });
 
 // ---------------- light mode and dark mode ----------->
 
 if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    document.documentElement.classList.add('dark')
+  document.documentElement.classList.add('dark')
+} else {
+  document.documentElement.classList.remove('dark')
+}
+
+function toggleTheme() {
+  document.documentElement.classList.toggle('dark');
+
+  if (document.documentElement.classList.contains('dark')) {
+    localStorage.theme = 'dark';
   } else {
-    document.documentElement.classList.remove('dark')
+    localStorage.theme = 'light';
   }
-
-  function toggleTheme(){
-    document.documentElement.classList.toggle('dark');
-
-    if(document.documentElement.classList.contains('dark')){
-        localStorage.theme = 'dark';
-    }else{
-        localStorage.theme = 'light';
-    }
-  }
+}
 
 // ---------------- section navigation (always show all sections) -----------
-const sectionIds = ['home','about','skills','experience','projects','contact'];
+const sectionIds = ['home', 'about', 'skills', 'projects', 'experience', 'contact'];
 
-function setSectionVisibility(targetId){
-    const normalized = (!targetId || targetId === 'top') ? 'home' : targetId;
-    // Ensure all sections are visible at all times
+function setSectionVisibility(targetId) {
+  const normalized = (!targetId || targetId === 'top') ? 'home' : targetId;
+
+  if (normalized === 'home') {
+    // HOME MODE: Show ALL sections
     sectionIds.forEach(id => {
-        const el = document.getElementById(id);
-        if(el){ el.classList.remove('hidden'); }
+      const el = document.getElementById(id);
+      if (el) el.classList.remove('hidden');
     });
-
-    if(normalized === 'home'){
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        return;
-    }
-
-    const targetEl = document.getElementById(normalized);
-    if(targetEl){
-        const navHeight = navBar ? navBar.offsetHeight : 0;
-        const y = targetEl.getBoundingClientRect().top + window.pageYOffset - navHeight;
-        window.scrollTo({ top: Math.max(y, 0), behavior: 'smooth' });
-    }
+    // Scroll to very top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    // FOCUS MODE: Show ONLY the target section
+    sectionIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        if (id === normalized) {
+          el.classList.remove('hidden');
+        } else {
+          el.classList.add('hidden');
+        }
+      }
+    });
+    // Scroll to top immediately to show the focused section correctly
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }
 }
 
 // Intercept nav link clicks (desktop and mobile)
 document.querySelectorAll('a[href^="#"]').forEach(a => {
-    const hash = a.getAttribute('href');
-    // Only handle our main nav targets
-    if(['#top','#home','#about','#skills','#experience','#projects','#contact'].includes(hash)){
-        a.addEventListener('click', (e) => {
-            e.preventDefault();
-            const id = hash.replace('#','');
-            setSectionVisibility(id);
-            // Close mobile menu if open
-            if(mobileMenu && mobileMenu.classList.contains('show')){
-                closeMenu();
-            }
-            // Update URL hash without jumping
-            history.replaceState(null, '', `#${id}`);
-        });
-    }
+  const hash = a.getAttribute('href');
+  // Only handle our main nav targets
+  if (['#top', '#home', '#about', '#skills', '#experience', '#projects', '#contact'].includes(hash)) {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      const id = hash.replace('#', '');
+      setSectionVisibility(id);
+      // Close mobile menu if open
+      if (mobileMenu && mobileMenu.classList.contains('show')) {
+        closeMenu();
+      }
+      // Update URL hash without jumping
+      history.replaceState(null, '', `#${id}`);
+    });
+  }
 });
 
 // Apply initial state based on URL hash
 window.addEventListener('DOMContentLoaded', () => {
-    const initial = (location.hash || '#home').replace('#','');
-    // If any section accidentally retained 'hidden', unhide all
-    sectionIds.forEach(id => {
-        const el = document.getElementById(id);
-        if(el){ el.classList.remove('hidden'); }
-    });
-    setSectionVisibility(initial);
+  const initial = (location.hash || '#home').replace('#', '');
+  // If any section accidentally retained 'hidden', unhide all
+  sectionIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.classList.remove('hidden'); }
+  });
+  setSectionVisibility(initial);
 });
 
 // Keep CSS --nav-height in sync with actual navbar height for accurate offsets
-function updateNavHeightVar(){
-  if(!navBar) return;
+function updateNavHeightVar() {
+  if (!navBar) return;
   const height = navBar.offsetHeight;
   document.documentElement.style.setProperty('--nav-height', `${height}px`);
 }
@@ -137,25 +156,25 @@ const experienceData = [
     completionCertificateUrl: './images/Internship certificate PySpider.pdf'
   },
   {
-  role: 'Front End Web Development Intern',
-  organization: 'Edunet Foundation (AICTE – SkillsBuild Program)',
-  duration: 'Aug 2025 - Oct 2025',
-  description: 'Selected for a 6-week internship under the Edunet Foundation and AICTE SkillsBuild Program. Worked independently on a front-end web development project under mentorship guidance. Gained hands-on experience through masterclasses, project-based learning, and real-world problem solving using the SkillsBuild e-learning platform.',
-  skills: ['HTML', 'CSS', 'JavaScript', 'Frontend Development', 'Project Management'],
-   offerLetterUrl: './images/AICTE(Front-End) offer_letter.pdf',
-   completionCertificateUrl: './images/AICTE FWD1.pdf'
-},
+    role: 'Front End Web Development Intern',
+    organization: 'Edunet Foundation (AICTE – SkillsBuild Program)',
+    duration: 'Aug 2025 - Oct 2025',
+    description: 'Selected for a 6-week internship under the Edunet Foundation and AICTE SkillsBuild Program. Worked independently on a front-end web development project under mentorship guidance. Gained hands-on experience through masterclasses, project-based learning, and real-world problem solving using the SkillsBuild e-learning platform.',
+    skills: ['HTML', 'CSS', 'JavaScript', 'Frontend Development', 'Project Management'],
+    offerLetterUrl: './images/AICTE(Front-End) offer_letter.pdf',
+    completionCertificateUrl: './images/AICTE FWD1.pdf'
+  },
   {
-  role: 'AI & Cloud Technology Intern',
-  organization: 'Edunet Foundation (AICTE – SkillsBuild Program)',
-  duration: 'Sept 2025 - Oct 2025',
-  description: 'Completed a 4-week internship focused on Artificial Intelligence and Cloud Technology. Worked on project-based learning with mentor guidance, exploring real-world applications through the IBM SkillsBuild platform.',
-  skills: ['Artificial Intelligence', 'Cloud Computing', 'Machine Learning', 'Python'],
-  offerLetterUrl: './images/AICTE B4 Offer Letter(AI).pdf',
-  completionCertificateUrl: './images/AICTE AI1.pdf'
-}
+    role: 'AI & Cloud Technology Intern',
+    organization: 'Edunet Foundation (AICTE – SkillsBuild Program)',
+    duration: 'Sept 2025 - Oct 2025',
+    description: 'Completed a 4-week internship focused on Artificial Intelligence and Cloud Technology. Worked on project-based learning with mentor guidance, exploring real-world applications through the IBM SkillsBuild platform.',
+    skills: ['Artificial Intelligence', 'Cloud Computing', 'Machine Learning', 'Python'],
+    offerLetterUrl: './images/AICTE B4 Offer Letter(AI).pdf',
+    completionCertificateUrl: './images/AICTE AI1.pdf'
+  }
 
- 
+
 ];
 
 const certificationsData = [
@@ -172,18 +191,18 @@ const certificationsData = [
     link: 'https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/9PBTqmSxAf6zZTseP/udmxiyHeqYQLkTPvf_9PBTqmSxAf6zZTseP_yKm7q2toDrfk3t4AF_1749913569450_completion_certificate.pdf'
   },
   {
-  title: 'TCS iON Career Edge - Young Professional',
-  issuedBy: 'TCS iON',
-  date: ' Jul 2025',
-  link: './images/Karthik_K TCS_ion.pdf'
-}
-,
+    title: 'TCS iON Career Edge - Young Professional',
+    issuedBy: 'TCS iON',
+    date: ' Jul 2025',
+    link: './images/Karthik_K TCS_ion.pdf'
+  }
+  ,
   {
-  title: '30 Days MasterClass in Full Stack Development',
-  issuedBy: 'NoviTech R&D Private Limited',
-  date: 'Oct 2024',
-  link: './images/Novi-Tech.pdf'
-},
+    title: '30 Days MasterClass in Full Stack Development',
+    issuedBy: 'NoviTech R&D Private Limited',
+    date: 'Oct 2024',
+    link: './images/Novi-Tech.pdf'
+  },
 
 ];
 
@@ -210,30 +229,30 @@ function applyFadeAnimation(element, show) {
   }
 }
 
-function renderExperience(){
+function renderExperience() {
   const container = document.getElementById('experienceList');
-  if(!container) return;
+  if (!container) return;
   // latest first (already in order, but ensure)
   const items = [...experienceData];
   const visible = showAllExperience ? items : items.slice(0, 2); // Show only first 2 items initially
-  
+
   // Apply fade animation
   applyFadeAnimation(container, showAllExperience);
-  
+
   container.innerHTML = visible.map(exp => {
-    const skills = exp.skills && exp.skills.length ? `<div class=\"mt-2 flex flex-wrap gap-2\">${exp.skills.map(s=>`<span class=\"px-2 py-0.5 text-xs rounded-full bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300\">${s}</span>`).join('')}</div>` : '';
-    
+    const skills = exp.skills && exp.skills.length ? `<div class=\"mt-2 flex flex-wrap gap-2\">${exp.skills.map(s => `<span class=\"px-2 py-0.5 text-xs rounded-full bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300\">${s}</span>`).join('')}</div>` : '';
+
     // Create the new buttons only if URLs are provided
-    const offerButton = exp.offerLetterUrl ? 
+    const offerButton = exp.offerLetterUrl ?
       `<a href=\"${exp.offerLetterUrl}\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"px-4 py-1.5 rounded-full border border-purple-600 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors text-center\">View Offer Letter</a>` : '';
-    
-    const completionButton = exp.completionCertificateUrl ? 
+
+    const completionButton = exp.completionCertificateUrl ?
       `<a href=\"${exp.completionCertificateUrl}\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"px-4 py-1.5 rounded-full border border-purple-600 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors text-center\">View Completion Certificate</a>` : '';
-    
+
     // Only show the buttons container if at least one button exists
-    const buttonsContainer = (exp.offerLetterUrl || exp.completionCertificateUrl) ? 
+    const buttonsContainer = (exp.offerLetterUrl || exp.completionCertificateUrl) ?
       `<div class=\"mt-3 flex flex-col sm:flex-row sm:space-x-3 space-y-2 sm:space-y-0\">${offerButton}${completionButton ? (offerButton ? ' ' : '') + completionButton : ''}</div>` : '';
-    
+
     return `
       <div class=\"p-5 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all\">
         <div class=\"flex items-center justify-between\">
@@ -249,16 +268,16 @@ function renderExperience(){
   }).join('');
 }
 
-function renderCertifications(){
+function renderCertifications() {
   const container = document.getElementById('certList');
-  if(!container) return;
+  if (!container) return;
   // latest first by date string descending (simple)
   const items = [...certificationsData];
-  const visible = showAllCerts ? items : items.slice(0,4); // Show 4 items by default instead of 3
-  
+  const visible = showAllCerts ? items : items.slice(0, 4); // Show 4 items by default instead of 3
+
   // Apply fade animation
   applyFadeAnimation(container);
-  
+
   container.innerHTML = visible.map(cert => `
     <div class=\"p-5 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all\">
       <div class=\"flex items-center justify-between\">
@@ -272,33 +291,44 @@ function renderCertifications(){
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  setSectionVisibility('home');
   renderExperience();
   renderCertifications();
-  
+
   // Handle unified button for both sections
   const toggleAllBtn = document.getElementById('toggleAllBtn');
-  if(toggleAllBtn){
+  if (toggleAllBtn) {
     toggleAllBtn.addEventListener('click', () => {
       // Toggle both sections
       showAllExperience = !showAllExperience;
       showAllCerts = !showAllCerts;
-      
+
       // Re-render both sections
       renderExperience();
       renderCertifications();
-      
+
       // Update button text
       const allShown = showAllExperience && showAllCerts;
       toggleAllBtn.textContent = allShown ? 'View Less' : 'View More';
+
+      if (!allShown) {
+        // Scroll back to the top of the experience section
+        const expSection = document.getElementById('experience');
+        if (expSection) {
+          setTimeout(() => {
+            expSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 100);
+        }
+      }
     });
   }
 });
 
 // ---------------- PDF Preview helpers ----------------
-function openPdfPreview(pdfUrl){
+function openPdfPreview(pdfUrl) {
   const modal = document.getElementById('pdfModal');
   const frame = document.getElementById('pdfFrame');
-  if(!modal || !frame) return;
+  if (!modal || !frame) return;
   // Default zoom: 75% for external links, FORCE 25% for local PDFs in folder
   let zoomedUrl = pdfUrl || '';
   try {
@@ -336,10 +366,10 @@ function openPdfPreview(pdfUrl){
   document.body.classList.add('overflow-hidden');
 }
 
-function closePdfPreview(){
+function closePdfPreview() {
   const modal = document.getElementById('pdfModal');
   const frame = document.getElementById('pdfFrame');
-  if(!modal || !frame) return;
+  if (!modal || !frame) return;
   frame.src = '';
   modal.classList.add('hidden');
   // Restore background scroll when modal closes
@@ -349,10 +379,78 @@ function closePdfPreview(){
 // Enhance certificate links: if link ends with .pdf, open modal preview
 document.addEventListener('click', (e) => {
   const anchor = e.target.closest('a');
-  if(!anchor) return;
+  if (!anchor) return;
   const href = anchor.getAttribute('href') || '';
-  if(href.toLowerCase().endsWith('.pdf')){
+  if (href.toLowerCase().endsWith('.pdf')) {
     e.preventDefault();
     openPdfPreview(href);
+  }
+});
+
+// ---------------- Projects View More/Less Logic ----------------
+document.addEventListener('DOMContentLoaded', () => {
+  const viewMoreBtn = document.getElementById('viewMoreProjectsBtn');
+  const projectCards = document.querySelectorAll('.project-card');
+
+  if (viewMoreBtn && projectCards.length > 6) {
+    viewMoreBtn.addEventListener('click', () => {
+      const isExpanded = viewMoreBtn.textContent.trim() === 'View Less';
+      const hiddenProjects = Array.from(projectCards).slice(6);
+
+      if (!isExpanded) {
+        // Expand: Show additional projects
+        hiddenProjects.forEach((card, index) => {
+          card.classList.remove('hidden');
+          // Start slightly smaller and transparent
+          card.style.opacity = '0';
+          card.style.transform = 'scale(0.95)';
+
+          // Animate to full size and opacity
+          const anim = card.animate([
+            { opacity: 0, transform: 'scale(0.95)' },
+            { opacity: 1, transform: 'scale(1)' }
+          ], {
+            duration: 500,
+            easing: 'ease-out',
+            fill: 'forwards',
+            delay: index * 100 // Staggered delay
+          });
+
+          anim.onfinish = () => {
+            card.style.opacity = '1';
+            card.style.transform = 'scale(1)';
+          };
+        });
+        viewMoreBtn.textContent = 'View Less';
+      } else {
+        // Collapse: Hide additional projects
+        hiddenProjects.reverse().forEach((card, index) => {
+          const anim = card.animate([
+            { opacity: 1, transform: 'scale(1)' },
+            { opacity: 0, transform: 'scale(0.95)' }
+          ], {
+            duration: 400,
+            easing: 'ease-in',
+            fill: 'forwards',
+            delay: index * 50 // Faster staggered delay for closing
+          });
+
+          anim.onfinish = () => {
+            card.classList.add('hidden');
+            card.style.opacity = '';
+            card.style.transform = '';
+          };
+        });
+        viewMoreBtn.textContent = 'View More';
+
+        // Scroll back to the top of the projects section so the user isn't left at the bottom
+        const projectsSection = document.getElementById('projects');
+        if (projectsSection) {
+          setTimeout(() => {
+            projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 100); // Slight delay to let animations start
+        }
+      }
+    });
   }
 });
