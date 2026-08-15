@@ -298,64 +298,80 @@ function renderCertifications() {
   }
 }
 
+// ---------------- Contact Form AJAX Submission ----------------
+async function handleContactSubmit(e) {
+  if (e) e.preventDefault();
+  const contactForm = document.getElementById('contactForm');
+  const formSuccessMessage = document.getElementById('formSuccessMessage');
+  if (!contactForm || !formSuccessMessage) return false;
+
+  const submitBtn = contactForm.querySelector('button[type="submit"]');
+  const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';
+
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `
+      <span class="inline-block animate-spin mr-1"><i class="fas fa-circle-notch text-xs"></i></span>
+      <span>Sending...</span>
+    `;
+  }
+
+  try {
+    const formData = new FormData(contactForm);
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: json
+    });
+
+    const result = await response.json();
+    if (response.status === 200 || result.success) {
+      contactForm.reset();
+      contactForm.classList.add('hidden');
+      formSuccessMessage.classList.remove('hidden');
+    } else {
+      alert(result.message || 'Something went wrong. Please try again or email directly.');
+    }
+  } catch (err) {
+    alert('Network error. Please check your connection or email directly.');
+  } finally {
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnHtml;
+    }
+  }
+  return false;
+}
+
+function resetContactForm() {
+  const contactForm = document.getElementById('contactForm');
+  const formSuccessMessage = document.getElementById('formSuccessMessage');
+  if (formSuccessMessage) formSuccessMessage.classList.add('hidden');
+  if (contactForm) contactForm.classList.remove('hidden');
+}
+
+window.handleContactSubmit = handleContactSubmit;
+window.resetContactForm = resetContactForm;
+
 document.addEventListener('DOMContentLoaded', () => {
   setSectionVisibility('home');
   renderExperience();
   renderCertifications();
 
-  // ---------------- Contact Form AJAX Submission ----------------
   const contactForm = document.getElementById('contactForm');
-  const formSuccessMessage = document.getElementById('formSuccessMessage');
+  if (contactForm) {
+    contactForm.addEventListener('submit', handleContactSubmit);
+  }
+
   const resetFormBtn = document.getElementById('resetFormBtn');
-
-  if (contactForm && formSuccessMessage) {
-    contactForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const submitBtn = contactForm.querySelector('button[type="submit"]');
-      const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';
-
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = `
-          <span class="inline-block animate-spin mr-1"><i class="fas fa-circle-notch text-xs"></i></span>
-          <span>Sending...</span>
-        `;
-      }
-
-      try {
-        const formData = new FormData(contactForm);
-        const response = await fetch(contactForm.action, {
-          method: 'POST',
-          body: formData,
-          headers: {
-            'Accept': 'application/json'
-          }
-        });
-
-        const result = await response.json();
-        if (response.ok && result.success) {
-          contactForm.reset();
-          contactForm.classList.add('hidden');
-          formSuccessMessage.classList.remove('hidden');
-        } else {
-          alert(result.message || 'Something went wrong. Please try again or email directly.');
-        }
-      } catch (err) {
-        alert('Network error. Please check your connection or email directly.');
-      } finally {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = originalBtnHtml;
-        }
-      }
-    });
-
-    if (resetFormBtn) {
-      resetFormBtn.addEventListener('click', () => {
-        formSuccessMessage.classList.add('hidden');
-        contactForm.classList.remove('hidden');
-      });
-    }
+  if (resetFormBtn) {
+    resetFormBtn.addEventListener('click', resetContactForm);
   }
 });
 
