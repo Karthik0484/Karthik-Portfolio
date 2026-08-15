@@ -237,7 +237,7 @@ function renderExperience() {
 
   container.innerHTML = experienceData.map(exp => {
     const skillsHtml = exp.skills && exp.skills.length
-      ? `<div class="mt-3 flex flex-wrap gap-1.5">${exp.skills.map(s => `<span class="px-2.5 py-0.5 text-xs font-medium rounded-full bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-300 border border-purple-100 dark:border-purple-900/40">${s}</span>`).join('')}</div>`
+      ? `<div class="mt-3 flex flex-wrap gap-1.5 sm:gap-2">${exp.skills.map(s => `<span class="px-2.5 py-0.5 text-xs font-medium rounded-full bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-300 border border-purple-100 dark:border-purple-900/40">${s}</span>`).join('')}</div>`
       : '';
 
     const highlightBorder = exp.isCurrent
@@ -245,13 +245,13 @@ function renderExperience() {
       : 'border border-gray-200 dark:border-gray-700 hover:border-purple-200 dark:hover:border-purple-800 shadow-sm';
 
     return `
-      <div class="p-4.5 sm:p-5 rounded-2xl bg-white dark:bg-gray-800 ${highlightBorder} hover:shadow-md transition-all duration-300">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-1">
-          <h4 class="text-base sm:text-lg font-bold text-gray-900 dark:text-white">${exp.role}</h4>
+      <div class="p-4 sm:p-5 rounded-2xl bg-white dark:bg-gray-800 ${highlightBorder} hover:shadow-md transition-all duration-300 w-full min-w-0">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 mb-1.5">
+          <h4 class="text-sm sm:text-base md:text-lg font-bold text-gray-900 dark:text-white leading-snug">${exp.role}</h4>
           <span class="text-xs font-medium text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900/30 px-2.5 py-0.5 rounded-full w-fit shrink-0">${exp.duration}</span>
         </div>
-        <p class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">${exp.company}</p>
-        <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">${exp.description}</p>
+        <p class="text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">${exp.company}</p>
+        <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 leading-relaxed">${exp.description}</p>
         ${skillsHtml}
       </div>
     `;
@@ -262,14 +262,14 @@ function renderCertifications() {
   const certContainer = document.getElementById('certList');
   if (certContainer) {
     certContainer.innerHTML = certificationsData.map(cert => `
-      <div class="p-3.5 sm:p-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700/70 hover:border-purple-200 dark:hover:border-purple-800/60 shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-between gap-3">
+      <div class="p-3.5 sm:p-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700/70 hover:border-purple-200 dark:hover:border-purple-800/60 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 w-full min-w-0">
         <div class="min-w-0 flex-1">
-          <h4 class="text-sm font-semibold text-gray-900 dark:text-white truncate">${cert.title}</h4>
-          <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">${cert.issuedBy} • <span class="font-medium">${cert.date}</span></p>
+          <h4 class="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white leading-snug">${cert.title}</h4>
+          <p class="text-[11px] sm:text-xs text-gray-500 dark:text-gray-400 mt-0.5">${cert.issuedBy} • <span class="font-medium">${cert.date}</span></p>
         </div>
         ${cert.link ? `
           <a href="${cert.link}" target="_blank" rel="noopener noreferrer"
-            class="shrink-0 px-3 py-1 text-xs font-medium rounded-full border border-purple-500/70 text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/30 transition-all inline-flex items-center gap-1.5">
+            class="shrink-0 px-3 py-1 text-xs font-medium rounded-full border border-purple-500/70 text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/30 transition-all inline-flex items-center gap-1.5 self-start sm:self-auto">
             <i class="fas fa-file-pdf text-[10px]"></i>
             <span>View Certificate</span>
           </a>
@@ -281,14 +281,14 @@ function renderCertifications() {
   const trainingContainer = document.getElementById('trainingList');
   if (trainingContainer) {
     trainingContainer.innerHTML = trainingData.map(item => `
-      <div class="p-3.5 sm:p-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700/70 hover:border-purple-200 dark:hover:border-purple-800/60 shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-between gap-3">
+      <div class="p-3.5 sm:p-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700/70 hover:border-purple-200 dark:hover:border-purple-800/60 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 w-full min-w-0">
         <div class="min-w-0 flex-1">
-          <h4 class="text-sm font-semibold text-gray-900 dark:text-white truncate">${item.title}</h4>
-          <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">${item.provider} • <span class="font-medium">${item.duration}</span></p>
+          <h4 class="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white leading-snug">${item.title}</h4>
+          <p class="text-[11px] sm:text-xs text-gray-500 dark:text-gray-400 mt-0.5">${item.provider} • <span class="font-medium">${item.duration}</span></p>
         </div>
         ${item.link ? `
           <a href="${item.link}" target="_blank" rel="noopener noreferrer"
-            class="shrink-0 px-3 py-1 text-xs font-medium rounded-full border border-purple-500/70 text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/30 transition-all inline-flex items-center gap-1.5">
+            class="shrink-0 px-3 py-1 text-xs font-medium rounded-full border border-purple-500/70 text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/30 transition-all inline-flex items-center gap-1.5 self-start sm:self-auto">
             <i class="fas fa-file-pdf text-[10px]"></i>
             <span>View Certificate</span>
           </a>
