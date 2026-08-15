@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <g font-family="'Outfit', system-ui, -apple-system, sans-serif" font-size="28" font-weight="600" fill="#111827" text-anchor="middle">
+    <!-- SOFTWARE (8 letters: 0° to 126°, step 18°) -->
+    <text x="150" y="42" transform="rotate(0, 150, 150)">S</text>
+    <text x="150" y="42" transform="rotate(18, 150, 150)">O</text>
+    <text x="150" y="42" transform="rotate(36, 150, 150)">F</text>
+    <text x="150" y="42" transform="rotate(54, 150, 150)">T</text>
+    <text x="150" y="42" transform="rotate(72, 150, 150)">W</text>
+    <text x="150" y="42" transform="rotate(90, 150, 150)">A</text>
+    <text x="150" y="42" transform="rotate(108, 150, 150)">R</text>
+    <text x="150" y="42" transform="rotate(126, 150, 150)">E</text>
+
+    <!-- DEVELOPER (9 letters: 172° to 316°, step 18°) -->
+    <text x="150" y="42" transform="rotate(172, 150, 150)">D</text>
+    <text x="150" y="42" transform="rotate(190, 150, 150)">E</text>
+    <text x="150" y="42" transform="rotate(208, 150, 150)">V</text>
+    <text x="150" y="42" transform="rotate(226, 150, 150)">E</text>
+    <text x="150" y="42" transform="rotate(244, 150, 150)">L</text>
+    <text x="150" y="42" transform="rotate(262, 150, 150)">O</text>
+    <text x="150" y="42" transform="rotate(280, 150, 150)">P</text>
+    <text x="150" y="42" transform="rotate(298, 150, 150)">E</text>
+    <text x="150" y="42" transform="rotate(316, 150, 150)">R</text>
+  </g>
+</svg>

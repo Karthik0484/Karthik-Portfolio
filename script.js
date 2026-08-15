@@ -169,151 +169,133 @@ function updateNavHeightVar() {
 window.addEventListener('load', updateNavHeightVar);
 window.addEventListener('resize', updateNavHeightVar);
 
-// ---------------- Dynamic Experience & Certifications rendering -----------
+// // ---------------- Dynamic Experience, Certifications & Training Rendering -----------
 const experienceData = [
   {
-    role: 'Python Full Stack with DevOps Intern',
-    organization: 'PySpiders BTM',
-    duration: 'Jun 2025 - Jul 2025',
-    description: 'Completed a one-month internship focused on Python programming, full stack development, and DevOps tools. Actively participated in hands-on training, project work, and team collaboration, demonstrating dedication, punctuality, and a strong learning attitude.',
-    skills: ['Python', 'Full Stack Development', 'DevOps', 'HTML', 'CSS', 'JavaScript'],
-    // Optional documents; add valid URLs to show buttons
-    offerLetterUrl: './images/QSpiders offer_letter.pdf',
-    completionCertificateUrl: './images/Internship certificate PySpider.pdf'
+    role: 'Software Engineering Intern',
+    company: 'Wyzmindz Solutions Pvt. Ltd.',
+    duration: 'May 2026 – Present',
+    description: 'Working on Python-based data engineering and automation workflows including ETL orchestration, FTP monitoring, Talend/Python job triggering, and Windows Service deployment with NSSM. Contributing to data migration, validation, and AI-based speech processing workflows.',
+    skills: ['Python', 'ETL', 'MSSQL', 'MySQL', 'MongoDB', 'ClickHouse', 'Talend', 'NSSM'],
+    isCurrent: true
   },
   {
-    role: 'Front End Web Development Intern',
-    organization: 'Edunet Foundation (AICTE – SkillsBuild Program)',
-    duration: 'Aug 2025 - Oct 2025',
-    description: 'Selected for a 6-week internship under the Edunet Foundation and AICTE SkillsBuild Program. Worked independently on a front-end web development project under mentorship guidance. Gained hands-on experience through masterclasses, project-based learning, and real-world problem solving using the SkillsBuild e-learning platform.',
-    skills: ['HTML', 'CSS', 'JavaScript', 'Frontend Development', 'Project Management'],
-    offerLetterUrl: './images/AICTE(Front-End) offer_letter.pdf',
-    completionCertificateUrl: './images/AICTE FWD1.pdf'
-  },
-  {
-    role: 'AI & Cloud Technology Intern',
-    organization: 'Edunet Foundation (AICTE – SkillsBuild Program)',
-    duration: 'Sept 2025 - Oct 2025',
-    description: 'Completed a 4-week internship focused on Artificial Intelligence and Cloud Technology. Worked on project-based learning with mentor guidance, exploring real-world applications through the IBM SkillsBuild platform.',
-    skills: ['Artificial Intelligence', 'Cloud Computing', 'Machine Learning', 'Python'],
-    offerLetterUrl: './images/AICTE B4 Offer Letter(AI).pdf',
-    completionCertificateUrl: './images/AICTE AI1.pdf'
+    role: 'Full Stack Development Intern',
+    company: 'Sourcesys Technologies',
+    duration: 'Feb 2026 – Apr 2026',
+    description: 'Developed web interfaces and backend services using React.js, Node.js, Express.js, and MongoDB, with experience in REST APIs, authentication, API integration, debugging, and testing.',
+    skills: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'REST APIs'],
+    isCurrent: false
   }
-
-
 ];
 
 const certificationsData = [
   {
-    title: 'The Complete Full‑Stack Web Development Bootcamp',
+    title: 'Artificial Intelligence Fundamentals',
+    issuedBy: 'IBM SkillsBuild',
+    date: 'Oct 2025',
+    link: './images/Completion Certificate _ SkillsBuild(AI).pdf'
+  },
+  {
+    title: 'The Complete Full-Stack Web Development Bootcamp',
     issuedBy: 'Udemy',
     date: 'Sept 2025',
     link: './images/Udemy-Certificate.pdf'
   },
   {
-    title: 'Deloitte Australia – Technology Job Simulation (Forage)',
-    issuedBy: 'Deloitte (via Forage)',
+    title: 'Deloitte Australia Technology Job Simulation',
+    issuedBy: 'Forage',
     date: 'Jun 2025',
     link: 'https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/9PBTqmSxAf6zZTseP/udmxiyHeqYQLkTPvf_9PBTqmSxAf6zZTseP_yKm7q2toDrfk3t4AF_1749913569450_completion_certificate.pdf'
   },
   {
-    title: 'TCS iON Career Edge - Young Professional',
+    title: 'TCS iON Career Edge – Young Professional',
     issuedBy: 'TCS iON',
-    date: ' Jul 2025',
+    date: 'Jul 2025',
     link: './images/Karthik_K TCS_ion.pdf'
   }
-  ,
-  {
-    title: '30 Days MasterClass in Full Stack Development',
-    issuedBy: 'NoviTech R&D Private Limited',
-    date: 'Oct 2024',
-    link: './images/Novi-Tech.pdf'
-  },
-
 ];
 
-let showAllCerts = false;
-let showAllExperience = false;
-
-// Function to apply fade animation to elements
-function applyFadeAnimation(element, show) {
-  if (show) {
-    element.style.opacity = '0';
-    element.style.transition = 'opacity 0.3s ease-in-out';
-    setTimeout(() => {
-      element.style.opacity = '1';
-    }, 10);
-  } else {
-    element.style.opacity = '1';
-    element.style.transition = 'opacity 0.3s ease-in-out';
-    setTimeout(() => {
-      element.style.opacity = '0';
-      setTimeout(() => {
-        element.style.opacity = '1';
-      }, 300);
-    }, 10);
+const trainingData = [
+  {
+    title: 'AI & Cloud Technology',
+    provider: 'Edunet Foundation',
+    duration: 'Sep 2025 – Oct 2025',
+    link: './images/AICTE AI1.pdf'
+  },
+  {
+    title: 'Front-End Web Development',
+    provider: 'Edunet Foundation',
+    duration: 'Aug 2025 – Oct 2025',
+    link: './images/AICTE FWD1.pdf'
   }
-}
+];
 
 function renderExperience() {
   const container = document.getElementById('experienceList');
   if (!container) return;
-  // latest first (already in order, but ensure)
-  const items = [...experienceData];
-  const visible = showAllExperience ? items : items.slice(0, 2); // Show only first 2 items initially
 
-  // Apply fade animation
-  applyFadeAnimation(container, showAllExperience);
+  container.innerHTML = experienceData.map(exp => {
+    const skillsHtml = exp.skills && exp.skills.length
+      ? `<div class="mt-3 flex flex-wrap gap-1.5">${exp.skills.map(s => `<span class="px-2.5 py-0.5 text-xs font-medium rounded-full bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-300 border border-purple-100 dark:border-purple-900/40">${s}</span>`).join('')}</div>`
+      : '';
 
-  container.innerHTML = visible.map(exp => {
-    const skills = exp.skills && exp.skills.length ? `<div class=\"mt-2 flex flex-wrap gap-2\">${exp.skills.map(s => `<span class=\"px-2 py-0.5 text-xs rounded-full bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300\">${s}</span>`).join('')}</div>` : '';
-
-    // Create the new buttons only if URLs are provided
-    const offerButton = exp.offerLetterUrl ?
-      `<a href=\"${exp.offerLetterUrl}\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"px-4 py-1.5 rounded-full border border-purple-600 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors text-center\">View Offer Letter</a>` : '';
-
-    const completionButton = exp.completionCertificateUrl ?
-      `<a href=\"${exp.completionCertificateUrl}\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"px-4 py-1.5 rounded-full border border-purple-600 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors text-center\">View Completion Certificate</a>` : '';
-
-    // Only show the buttons container if at least one button exists
-    const buttonsContainer = (exp.offerLetterUrl || exp.completionCertificateUrl) ?
-      `<div class=\"mt-3 flex flex-col sm:flex-row sm:space-x-3 space-y-2 sm:space-y-0\">${offerButton}${completionButton ? (offerButton ? ' ' : '') + completionButton : ''}</div>` : '';
+    const highlightBorder = exp.isCurrent
+      ? 'border border-purple-300/90 dark:border-purple-800/80 hover:border-purple-400 dark:hover:border-purple-500 shadow-sm'
+      : 'border border-gray-200 dark:border-gray-700 hover:border-purple-200 dark:hover:border-purple-800 shadow-sm';
 
     return `
-      <div class=\"p-5 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all\">
-        <div class=\"flex items-center justify-between\">
-          <h4 class=\"text-lg font-semibold\">${exp.role}</h4>
-          <span class=\"text-sm text-gray-500\">${exp.duration}</span>
+      <div class="p-4.5 sm:p-5 rounded-2xl bg-white dark:bg-gray-800 ${highlightBorder} hover:shadow-md transition-all duration-300">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-1">
+          <h4 class="text-base sm:text-lg font-bold text-gray-900 dark:text-white">${exp.role}</h4>
+          <span class="text-xs font-medium text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900/30 px-2.5 py-0.5 rounded-full w-fit shrink-0">${exp.duration}</span>
         </div>
-        <p class=\"text-sm text-gray-600 dark:text-gray-300\">${exp.organization}</p>
-        <p class=\"mt-2 text-gray-700 dark:text-gray-300\">${exp.description}</p>
-        ${skills}
-        ${buttonsContainer}
+        <p class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">${exp.company}</p>
+        <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">${exp.description}</p>
+        ${skillsHtml}
       </div>
     `;
   }).join('');
 }
 
 function renderCertifications() {
-  const container = document.getElementById('certList');
-  if (!container) return;
-  // latest first by date string descending (simple)
-  const items = [...certificationsData];
-  const visible = showAllCerts ? items : items.slice(0, 4); // Show 4 items by default instead of 3
-
-  // Apply fade animation
-  applyFadeAnimation(container);
-
-  container.innerHTML = visible.map(cert => `
-    <div class=\"p-5 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all\">
-      <div class=\"flex items-center justify-between\">
-        <h4 class=\"text-lg font-semibold\">${cert.title}</h4>
-        <span class=\"text-sm text-gray-500\">${cert.date}</span>
+  const certContainer = document.getElementById('certList');
+  if (certContainer) {
+    certContainer.innerHTML = certificationsData.map(cert => `
+      <div class="p-3.5 sm:p-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700/70 hover:border-purple-200 dark:hover:border-purple-800/60 shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-between gap-3">
+        <div class="min-w-0 flex-1">
+          <h4 class="text-sm font-semibold text-gray-900 dark:text-white truncate">${cert.title}</h4>
+          <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">${cert.issuedBy} • <span class="font-medium">${cert.date}</span></p>
+        </div>
+        ${cert.link ? `
+          <a href="${cert.link}" target="_blank" rel="noopener noreferrer"
+            class="shrink-0 px-3 py-1 text-xs font-medium rounded-full border border-purple-500/70 text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/30 transition-all inline-flex items-center gap-1.5">
+            <i class="fas fa-file-pdf text-[10px]"></i>
+            <span>View Certificate</span>
+          </a>
+        ` : ''}
       </div>
-      <p class=\"text-sm text-gray-600 dark:text-gray-300\">${cert.issuedBy}</p>
-      ${cert.link ? `<a href=\"${cert.link}\" target=\"_blank\" class=\"mt-3 inline-block px-4 py-1.5 rounded-full border border-purple-600 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors\">View Certificate</a>` : ''}
-    </div>
-  `).join('');
+    `).join('');
+  }
+
+  const trainingContainer = document.getElementById('trainingList');
+  if (trainingContainer) {
+    trainingContainer.innerHTML = trainingData.map(item => `
+      <div class="p-3.5 sm:p-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700/70 hover:border-purple-200 dark:hover:border-purple-800/60 shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-between gap-3">
+        <div class="min-w-0 flex-1">
+          <h4 class="text-sm font-semibold text-gray-900 dark:text-white truncate">${item.title}</h4>
+          <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">${item.provider} • <span class="font-medium">${item.duration}</span></p>
+        </div>
+        ${item.link ? `
+          <a href="${item.link}" target="_blank" rel="noopener noreferrer"
+            class="shrink-0 px-3 py-1 text-xs font-medium rounded-full border border-purple-500/70 text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/30 transition-all inline-flex items-center gap-1.5">
+            <i class="fas fa-file-pdf text-[10px]"></i>
+            <span>View Certificate</span>
+          </a>
+        ` : ''}
+      </div>
+    `).join('');
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -321,32 +303,59 @@ document.addEventListener('DOMContentLoaded', () => {
   renderExperience();
   renderCertifications();
 
-  // Handle unified button for both sections
-  const toggleAllBtn = document.getElementById('toggleAllBtn');
-  if (toggleAllBtn) {
-    toggleAllBtn.addEventListener('click', () => {
-      // Toggle both sections
-      showAllExperience = !showAllExperience;
-      showAllCerts = !showAllCerts;
+  // ---------------- Contact Form AJAX Submission ----------------
+  const contactForm = document.getElementById('contactForm');
+  const formSuccessMessage = document.getElementById('formSuccessMessage');
+  const resetFormBtn = document.getElementById('resetFormBtn');
 
-      // Re-render both sections
-      renderExperience();
-      renderCertifications();
+  if (contactForm && formSuccessMessage) {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';
 
-      // Update button text
-      const allShown = showAllExperience && showAllCerts;
-      toggleAllBtn.textContent = allShown ? 'View Less' : 'View More';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `
+          <span class="inline-block animate-spin mr-1"><i class="fas fa-circle-notch text-xs"></i></span>
+          <span>Sending...</span>
+        `;
+      }
 
-      if (!allShown) {
-        // Scroll back to the top of the experience section
-        const expSection = document.getElementById('experience');
-        if (expSection) {
-          setTimeout(() => {
-            expSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }, 100);
+      try {
+        const formData = new FormData(contactForm);
+        const response = await fetch(contactForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        const result = await response.json();
+        if (response.ok && result.success) {
+          contactForm.reset();
+          contactForm.classList.add('hidden');
+          formSuccessMessage.classList.remove('hidden');
+        } else {
+          alert(result.message || 'Something went wrong. Please try again or email directly.');
+        }
+      } catch (err) {
+        alert('Network error. Please check your connection or email directly.');
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnHtml;
         }
       }
     });
+
+    if (resetFormBtn) {
+      resetFormBtn.addEventListener('click', () => {
+        formSuccessMessage.classList.add('hidden');
+        contactForm.classList.remove('hidden');
+      });
+    }
   }
 });
 
